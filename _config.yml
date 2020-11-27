@@ -4,16 +4,16 @@
 
 # Site
 title: 小骨子还在努力
-subtitle: '哈哈哈'
+subtitle: '还在努力'
 description: ''
 keywords:
 author: xiao hong zhong
-language: en
+language: zh-CN
 timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-url: https://xiaohongzhong.top
+url: http://xiaohongzhong.top
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -137,3 +137,7 @@ feed:
 
 sitemap:
     path: sitemap.xml
+
+permalink_pinyin:
+  enable: true
+  separator: '-' # default: '-'
