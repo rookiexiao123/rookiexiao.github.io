@@ -1,3 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
+<search> 
+  
+  
+    
+    <entry>
+      <title>supervisor + scrapy + python</title>
+      <link href="2020/11/26/supervisor-scrapy-python/"/>
+      <url>2020/11/26/supervisor-scrapy-python/</url>
+      
+        <content type="html"><![CDATA[<p>在ubuntu16.04下<br>最近在做一个项目，它是在服务器部署，首先我们的人员请求爬取新浪微博的话题和关键词，然后会返回爬到的微博用户id，bid，和图像url。之后再把这些图像送到深度学习所做的图像侵权检测系统，判断是否侵权我们的素材，返回相关的信息。</p><p>1.图像侵权检测</p><p>2.python 开启http服务</p><p>3.scrapy 爬取新浪微博</p><p>4.supervisor 进程管理</p><p>其实123慢慢调好了，这周调的最多的是怎么把1234放在一起，碰到了相当多的问题。</p><h3 id="开启supervisor-执行的命令可以是虚拟环境的命令，需要加上路径"><a href="#开启supervisor-执行的命令可以是虚拟环境的命令，需要加上路径" class="headerlink" title="开启supervisor 执行的命令可以是虚拟环境的命令，需要加上路径"></a>开启supervisor 执行的命令可以是虚拟环境的命令，需要加上路径</h3><p>比如</p><blockquote><p>[program:ibaotu-image-match]<br>command=<strong>/usr/local/data/anaconda3/envs/snakes/bin/python</strong> /usr/local/data/www/weibo_search_master/http_server_GET.py<br>directory=/usr/local/data/www/weibo_search_master<br>autostart=true<br>autorestart=true<br>stdout_logfile=/usr/local/data/www/log/out.log<br>stderr_logfile=/usr/local/data/www/log/err.log</p></blockquote><p>执行命令的时候就知道是执行哪里的python了</p><p>还可以web查看管理supervisor</p><blockquote><p>[inet_http_server] ; inet (TCP) server disabled by default<br>port=*:9001 ; (ip_address:port specifier, *:port for all iface)<br>;username=admin ; (default is no username (open server))<br>;password=admin ; (default is no password (open server))</p></blockquote><h3 id="supervisor命令"><a href="#supervisor命令" class="headerlink" title="supervisor命令"></a>supervisor命令</h3><p>查看状态<br>supervisorctl status<br>更新<br>supervisorctl update<br>重置<br>supervisorctl reload<br>结束<br>supervisorctl stop all<br>开始<br>supervisorctl start all<br>更新配置<br>supervisord -c /etc/supervisord/supervisord.conf</p><h3 id="遇到的报错"><a href="#遇到的报错" class="headerlink" title="遇到的报错"></a>遇到的报错</h3><blockquote><p>unix:///var/run/supervisor.sock no such file</p></blockquote><p>1.sudo touch /var/run/supervisor.sock</p><p>2.sudo chmod 777 /var/run/supervisor.sock</p><p>3.sudo service supervisor restart</p><blockquote><p>unix:///var/run/supervisor/supervisor.sock refused connection</p></blockquote><p>supervisord -c /etc/supervisord/supervisord.conf<br>启动supervisord并使用配置</p><blockquote><p>The ‘supervisor==3.2.0’ distribution was not found and is required by the application</p></blockquote><p>如果默认的python是python2,应该不会报错。如果是python3，就要修改<br>和terminator一样也是python版本引起的，编辑/usr/bin/supervisord将#!/usr/bin/python修改为#!/usr/bin/python2即可<br>貌似启动supervisor 只能用python2</p><blockquote><p>supervisord不能正常地话，查看它的log</p></blockquote><p>supervisorctl tail ibaotu-image-match stderr</p><blockquote><p>supervisorctl 启动起来，一直在报错重启， OSError: [Errno 98] Address already in use</p></blockquote><p>1.<br>netstat -tunlp<br>kill -9 6153<br>这个是每次都要这样，有点烦<br>2.<br>find / -name supervisor.sock<br>unlink /name/supervisor.sock</p><blockquote><p>root@ibaotu-algo:/usr/bin# scrapy<br>Traceback (most recent call last):<br>  File “/usr/local/bin/scrapy”, line 7, in <module><br>    from scrapy.cmdline import execute<br>  File “/usr/local/lib/python3.5/dist-packages/scrapy/<strong>init</strong>.py”, line 12, in <module><br>    from scrapy.spiders import Spider<br>  File “/usr/local/lib/python3.5/dist-packages/scrapy/spiders/<strong>init</strong>.py”, line 22<br>    name: Optional[str] = None<br>        ^<br>SyntaxError: invalid syntax</p></blockquote><p>在虚拟环境是好的，但是放在一起跑就出问题了。我研究了好久，才发现还是命令路径的问题。<br>在终端输入scrapy，虚拟环境是ok的，在普通的就报错。两个scrapy版本是一样的，<br>只不过虚拟环境的python是3.6.5，普通的python是3.5.2，不知道是不是和这个有关。<br>把scrapy改成/usr/local/data/anaconda3/envs/snakes/bin/scrapy</p><blockquote><p>scrapy是命令行，怎么在代码里面添加？</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#cmdline.execute([&quot;scrapy&quot;, &quot;crawl&quot;, &quot;search&quot;, &quot;-a&quot;, &quot;start_date&#x3D;%s&quot;%(start_date), &quot;-a&quot;, &quot;end_date&#x3D;%s&quot;%(end_date), &quot;-a&quot;, &quot;keyword_list&#x3D;%s&quot;%(keyword)])</span><br><span class="line">cmd &#x3D; &quot;&#x2F;usr&#x2F;local&#x2F;data&#x2F;anaconda3&#x2F;envs&#x2F;snakes&#x2F;bin&#x2F;scrapy crawl search -a &quot; + &quot;start_date&#x3D;%s&quot;%(start_date) + &quot; -a &quot; + &quot;end_date&#x3D;%s&quot;%(end_date) + &quot; -a &quot; + &quot;keyword_list&#x3D;%s&quot;%(keyword)</span><br><span class="line">os.system(cmd)</span><br></pre></td></tr></table></figure><blockquote><p>开启的http服务，客户请求爬虫，怎么把数据返回？</p></blockquote><p>一开始的想法是能不能搞个全局变量。怎么搞也搞不过去，<br>python跨文件的全局变量，后面知道scrapy是新开的进程，数据根本到不了。<br>后面把数据存到csv或者json文件，爬完再读取，再返回。</p><blockquote><p>no module named …</p></blockquote><p>因为路径的问题，也搞了好久，明明都添加了，还是报错，sys.path.append()<br>最后因为没有使用到全局变量，这个报错也就不了了之了。</p><blockquote><p>遍历字典，写入csv，一个数据固定的写入一行</p></blockquote><p>writer.writerow([item[‘weibo’][key] for key in item[‘weibo’].keys() if key == ‘id’ or key == ‘bid’ or key == ‘pics’])</p><blockquote><p>是csv转成json，还是直接爬取pipeline到json</p></blockquote><p>我选择了后者，爬取了json格式的文件下来，包括id，bid，picurl组成的json格式的数据。<br>一开始json格式还写不进去，应该是格式问题，我弄了data格式，之后ok了。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">with codecs.open(jsonfile_path, &#39;a+&#39;) as f:</span><br><span class="line">    data &#x3D; &#123;</span><br><span class="line">    &#39;id&#39;: item[&#39;weibo&#39;][&#39;user_id&#39;],</span><br><span class="line">    &#39;bid&#39;: item[&#39;weibo&#39;][&#39;bid&#39;],</span><br><span class="line">    &#39;screen_name&#39;: item[&#39;weibo&#39;][&#39;screen_name&#39;],</span><br><span class="line">    &#39;pics&#39;: item[&#39;weibo&#39;][&#39;pics&#39;]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    lines &#x3D; json.dumps(data, ensure_ascii&#x3D;False)</span><br><span class="line">    f.write(lines + &quot;\n&quot;)</span><br></pre></td></tr></table></figure><blockquote><p>然后也出现supervisor一直重启的问题</p></blockquote><p>因为配置中restart:默认为true，然后一直有htpp进程开着，报错OSError: [Errno 98] Address already in use；还有个原因就是原来的程序不是死循环，一会运行结束，又重启了。</p><h3 id="最后这个1234基本就能愉快地在一起玩耍了。"><a href="#最后这个1234基本就能愉快地在一起玩耍了。" class="headerlink" title="最后这个1234基本就能愉快地在一起玩耍了。"></a>最后这个1234基本就能愉快地在一起玩耍了。</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 爬虫 </tag>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>paddle学习</title>
+      <link href="2020/11/25/paddle-xue-xi/"/>
+      <url>2020/11/25/paddle-xue-xi/</url>
+      
+        <content type="html"><![CDATA[<p>波士顿房价预测任务</p><p>对于预测问题，可以根据预测输出的类型是连续的实数值，还是离散的标签，区分为回归任务和分类任务。因为房价是一个连续值，所以房价预测显然是一个回归任务。</p><p>数据归一化处理</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 深度学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> paddle </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>conda的使用</title>
+      <link href="2020/11/23/conda-de-shi-yong/"/>
+      <url>2020/11/23/conda-de-shi-yong/</url>
+      
+        <content type="html"><![CDATA[<h3 id="安装Anaconda"><a href="#安装Anaconda" class="headerlink" title="安装Anaconda"></a>安装Anaconda</h3><a id="more"></a><p>首先需要安装anaconda，在不同的电脑上下载使用很多次了，还是挺方便的。正好开通了博客，就记录下conda的使用。</p><h3 id="conda-创建虚拟环境"><a href="#conda-创建虚拟环境" class="headerlink" title="conda 创建虚拟环境"></a>conda 创建虚拟环境</h3><p>anaconda安装成功之后，如果不成功，网上很多安装的博客可以查看。应该有conda命令了。</p><p><code>conda -V</code></p><p>返回<code>conda 4.7.12</code></p><h5 id="1-创建虚拟环境"><a href="#1-创建虚拟环境" class="headerlink" title="1.创建虚拟环境"></a>1.创建虚拟环境</h5><p>命令：<br><code>conda create --name pytorch python=3.6.5</code></p><p>安装总是失败</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Collecting package metadata (current_repodata.json): ...working... done</span><br><span class="line">Solving environment: ...working... failed with repodata from current_repodata.json, will retry with next repodata source.</span><br><span class="line">Collecting package metadata (repodata.json): ...working...</span><br></pre></td></tr></table></figure><p>我添加了conda换源，可是还是不行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free&#x2F;</span><br><span class="line">conda config --add channels https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main&#x2F;</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure><p>修改命令<br><code>conda create --name pytorch python=3.6</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">$ conda create -n tensorflow python&#x3D;3.6.5</span><br><span class="line">Collecting package metadata (repodata.json): done</span><br><span class="line">Solving environment: done</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&gt; WARNING: A newer version of conda exists. &lt;&#x3D;&#x3D;</span><br><span class="line">  current version: 4.8.3</span><br><span class="line">  latest version: 4.9.2</span><br><span class="line"></span><br><span class="line">Please update conda by running</span><br><span class="line"></span><br><span class="line">    $ conda update -n base -c defaults conda</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Package Plan ##</span><br><span class="line"></span><br><span class="line">  environment location: C:\Users\DELL\Anaconda3\envs\tensorflow</span><br><span class="line"></span><br><span class="line">  added &#x2F; updated specs:</span><br><span class="line">    - python&#x3D;3.6.5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The following packages will be downloaded:</span><br><span class="line"></span><br><span class="line">    package                    |            build</span><br><span class="line">    ---------------------------|-----------------</span><br><span class="line">    certifi-2020.11.8          |   py36haa95532_0         151 KB</span><br><span class="line">    pip-20.2.4                 |   py36haa95532_0         2.1 MB</span><br><span class="line">    python-3.6.5               |       h0c2934d_0        21.6 MB</span><br><span class="line">    setuptools-50.3.1          |   py36haa95532_1         939 KB</span><br><span class="line">    vc-14.1                    |       h0510ff6_4           6 KB</span><br><span class="line">    vs2015_runtime-14.16.27012 |       hf0eaf9b_3         2.4 MB</span><br><span class="line">    wincertstore-0.2           |   py36h7fe50ca_0          13 KB</span><br><span class="line">    ------------------------------------------------------------</span><br><span class="line">                                           Total:        27.2 MB</span><br><span class="line"></span><br><span class="line">The following NEW packages will be INSTALLED:</span><br><span class="line"></span><br><span class="line">done</span><br><span class="line">#</span><br><span class="line"># To activate this environment, use</span><br><span class="line">#</span><br><span class="line">#     $ conda activate tensorflow</span><br><span class="line">#</span><br><span class="line"># To deactivate an active environment, use</span><br><span class="line">#</span><br><span class="line">#     $ conda deactivate</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>2.安装成功之后，可以查看确认下<code>conda env list</code></p><h3 id="conda-进入虚拟环境"><a href="#conda-进入虚拟环境" class="headerlink" title="conda 进入虚拟环境"></a>conda 进入虚拟环境</h3><p>conda activate tensorflow<br>或者<br>source activate tensorflow</p><h3 id="conda-退出虚拟环境"><a href="#conda-退出虚拟环境" class="headerlink" title="conda 退出虚拟环境"></a>conda 退出虚拟环境</h3><p>conda deactivate<br>或者试试source deactivate<br>没有退出，就多输入几次命令</p><h3 id="conda-添加镜像"><a href="#conda-添加镜像" class="headerlink" title="conda 添加镜像"></a>conda 添加镜像</h3><p>conda config –add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</a><br>conda config –add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</a><br>conda config –add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</a><br>conda config –add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/</a><br>#显示安装的镜像<br>conda config –set show_channel_urls yes<br>#已添加的channel在哪里查看<br>.condarc</p><h3 id="conda-删除虚拟环境"><a href="#conda-删除虚拟环境" class="headerlink" title="conda 删除虚拟环境"></a>conda 删除虚拟环境</h3><p>conda remove -n tensorflow –all</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n tensorflow --all</span><br><span class="line"></span><br><span class="line">Remove all packages in environment C:\Users\DELL\Anaconda3\envs\tensorflow:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Package Plan ##</span><br><span class="line"></span><br><span class="line">  environment location: C:\Users\DELL\Anaconda3\envs\tensorflow</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The following packages will be REMOVED:</span><br><span class="line"></span><br><span class="line">  certifi-2020.11.8-py36haa95532_0</span><br><span class="line">  pip-20.2.4-py36haa95532_0</span><br><span class="line">  python-3.6.5-h0c2934d_0</span><br><span class="line">  setuptools-50.3.1-py36haa95532_1</span><br><span class="line">  vc-14.1-h0510ff6_4</span><br><span class="line">  vs2015_runtime-14.16.27012-hf0eaf9b_3</span><br><span class="line">  wheel-0.35.1-pyhd3eb1b0_0</span><br><span class="line">  wincertstore-0.2-py36h7fe50ca_0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Proceed ([y]&#x2F;n)? y</span><br><span class="line"></span><br><span class="line">Preparing transaction: done</span><br><span class="line">Verifying transaction: done</span><br><span class="line">Executing transaction: done</span><br></pre></td></tr></table></figure><p>我正常用的就是这些命令，记录一下。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 环境搭建 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> anaconda </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>初识pytorch broatcasting</title>
+      <link href="2020/11/22/chu-shi-pytorch/"/>
+      <url>2020/11/22/chu-shi-pytorch/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> Pytorch </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> pytorch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>装备栏</title>
+      <link href="2020/11/19/zhuang-bei-lan/"/>
+      <url>2020/11/19/zhuang-bei-lan/</url>
+      
+        <content type="html"><![CDATA[<h3 id="这里是我日常使用的一些工具，主要是Windows上的，也有Ubuntu的。"><a href="#这里是我日常使用的一些工具，主要是Windows上的，也有Ubuntu的。" class="headerlink" title="这里是我日常使用的一些工具，主要是Windows上的，也有Ubuntu的。"></a>这里是我日常使用的一些工具<a id="more"></a>，主要是Windows上的，也有Ubuntu的。</h3><h2 id="编辑器：Atom-（使用体验超级好）"><a href="#编辑器：Atom-（使用体验超级好）" class="headerlink" title="编辑器：Atom （使用体验超级好）"></a>编辑器：Atom （使用体验超级好）</h2><h4 id="Packages："><a href="#Packages：" class="headerlink" title="Packages："></a>Packages：</h4><p>1.Hydropen<br>2.activate_power_mode<br>3.atom_python_run<br>4.atom_terminal<br>5.autocomplete-python<br>6.hyperclick<br>7.ide-python<br><strong>8.kite # 特别好用，使用有惊喜</strong><br>9.minimap<br>10.python-tools<br>11.run-in-terminal<br>其他很多包全是core packages，不进行列举。</p><h2 id="远程连接传输工具：Xshell-Winscp-Putty"><a href="#远程连接传输工具：Xshell-Winscp-Putty" class="headerlink" title="远程连接传输工具：Xshell Winscp Putty"></a>远程连接传输工具：Xshell Winscp Putty</h2><h2 id="Coding：Pycharm-Anaconda-Visual-Studio-Source-Insight"><a href="#Coding：Pycharm-Anaconda-Visual-Studio-Source-Insight" class="headerlink" title="Coding：Pycharm Anaconda Visual-Studio Source-Insight"></a>Coding：Pycharm Anaconda Visual-Studio Source-Insight</h2><h2 id="数据库：HeidiSQL"><a href="#数据库：HeidiSQL" class="headerlink" title="数据库：HeidiSQL"></a>数据库：HeidiSQL</h2><h2 id="查看神经网络的结构：Netron"><a href="#查看神经网络的结构：Netron" class="headerlink" title="查看神经网络的结构：Netron"></a>查看神经网络的结构：Netron</h2><h2 id="Cuda：v10-0"><a href="#Cuda：v10-0" class="headerlink" title="Cuda：v10.0"></a>Cuda：v10.0</h2><h2 id="Cudnn：v7-6-5"><a href="#Cudnn：v7-6-5" class="headerlink" title="Cudnn：v7.6.5"></a>Cudnn：v7.6.5</h2><h2 id="查看windows文件：listary"><a href="#查看windows文件：listary" class="headerlink" title="查看windows文件：listary"></a>查看windows文件：listary</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>还有30秒到达战场</title>
+      <link href="2020/11/18/huan-you-30-miao-dao-da-zhan-chang/"/>
+      <url>2020/11/18/huan-you-30-miao-dao-da-zhan-chang/</url>
+      
+        <content type="html"><![CDATA[<p>我知道它们为什么发出滴答滴答的声音了<a id="more"></a>，我也知道怎样让它们停下来 ——发条</p><p>我疯了？呵，很有可能 ——锤石</p><p>世间万物皆系于一箭之上 ——艾希</p><p>管好你的嘴，小鬼，否则你会发现自己正躺在基地等重生 ——赏金猎人</p><p>荣耀存于心，而非留于形我还在寻找，回家的路长路漫漫，唯剑做伴且随疾风前行，身后一许流星吾虽浪迹天涯，却未迷失本心 ——疾风剑豪</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 英雄联盟 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 游戏 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="2020/11/18/hello-world/"/>
+      <url>2020/11/18/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! <a id="more"></a>This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+    
+    
+    <entry>
+      <title>categories</title>
+      <link href="categories/index.html"/>
+      <url>categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>about</title>
+      <link href="about/index.html"/>
+      <url>about/index.html</url>
+      
+        <content type="html"><![CDATA[<p>我是小骨子，欢迎您</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>tags</title>
+      <link href="tags/index.html"/>
+      <url>tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>contact</title>
+      <link href="contact/index.html"/>
+      <url>contact/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+  
 </search>
