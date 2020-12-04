@@ -431,12 +431,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Pytorch/">
-                                <span class="chip bg-color">Pytorch</span>
-                            </a>
-                        
                             <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
                                 <span class="chip bg-color">图像处理</span>
+                            </a>
+                        
+                            <a href="/tags/Pytorch/">
+                                <span class="chip bg-color">Pytorch</span>
                             </a>
                         
                     </div>
@@ -469,7 +469,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    27
+                    1.2k
                 </div>
                 
 
@@ -487,6 +487,40 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>想要使用pytorch，就从最基础的图像分类，也是最熟悉的图像分类开始。</p>
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>如果直接从源代码下载CIFAR10数据集，本来就只有160M大小，结果下载一天也下载不好，下载太慢。建议从网上寻找数据集。</p>
+<p>下载完之后，需要修改源码内容。<br>打开我在anaconda下安装torch的虚拟环境，找到torchvision的包，在datasets文件夹下面有个cifar.py</p>
+<blockquote>
+<p>C:\Users\DELL\Anaconda3\envs\torch\Lib\site-packages\torchvision\datasets\cifar.py</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class CIFAR10(VisionDataset):</span><br><span class="line">    &quot;&quot;&quot;&#96;CIFAR10 &lt;https:&#x2F;&#x2F;www.cs.toronto.edu&#x2F;~kriz&#x2F;cifar.html&gt;&#96;_ Dataset.</span><br><span class="line"></span><br><span class="line">    Args:</span><br><span class="line">        root (string): Root directory of dataset where directory</span><br><span class="line">            &#96;&#96;cifar-10-batches-py&#96;&#96; exists or will be saved to if download is set to True.</span><br><span class="line">        train (bool, optional): If True, creates dataset from training set, otherwise</span><br><span class="line">            creates from test set.</span><br><span class="line">        transform (callable, optional): A function&#x2F;transform that takes in an PIL image</span><br><span class="line">            and returns a transformed version. E.g, &#96;&#96;transforms.RandomCrop&#96;&#96;</span><br><span class="line">        target_transform (callable, optional): A function&#x2F;transform that takes in the</span><br><span class="line">            target and transforms it.</span><br><span class="line">        download (bool, optional): If true, downloads the dataset from the internet and</span><br><span class="line">            puts it in root directory. If dataset is already downloaded, it is not</span><br><span class="line">            downloaded again.</span><br><span class="line"></span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    base_folder &#x3D; &#39;cifar-10-batches-py&#39;</span><br><span class="line">    url &#x3D; &quot;https:&#x2F;&#x2F;www.cs.toronto.edu&#x2F;~kriz&#x2F;cifar-10-python.tar.gz&quot;</span><br><span class="line">    filename &#x3D; &quot;cifar-10-python.tar.gz&quot;</span><br><span class="line">    tgz_md5 &#x3D; &#39;c58f30108f718f92721af3b95e74349a&#39;</span><br><span class="line">    train_list &#x3D; [</span><br><span class="line">        [&#39;data_batch_1&#39;, &#39;c99cafc152244af753f735de768cd75f&#39;],</span><br><span class="line">        [&#39;data_batch_2&#39;, &#39;d4bba439e000b95fd0a9bffe97cbabec&#39;],</span><br><span class="line">        [&#39;data_batch_3&#39;, &#39;54ebc095f3ab1f0389bbae665268c751&#39;],</span><br><span class="line">        [&#39;data_batch_4&#39;, &#39;634d18415352ddfa80567beed471001a&#39;],</span><br><span class="line">        [&#39;data_batch_5&#39;, &#39;482c414d41f54cd18b22e5b47cb7c3cb&#39;],</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>修改url，把url变成file:///D:/work/search_image/torch/dataset/cifar-10-python.tar.gz（这个是我下载的cifar10放置的位置）<br>之后运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import torchvision as tv</span><br><span class="line">import torchvision.transforms as transforms</span><br><span class="line">from torchvision.transforms import ToPILImage</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.nn.functional as F</span><br><span class="line">import torch</span><br><span class="line"></span><br><span class="line">show &#x3D; ToPILImage() # 可以把tensor转成Image，方便可视化</span><br><span class="line"></span><br><span class="line">transform &#x3D; transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),])</span><br><span class="line"></span><br><span class="line">trainset &#x3D; tv.datasets.CIFAR10(root&#x3D;&#39;D:&#x2F;work&#x2F;search_image&#x2F;torch&#x2F;dataset&#x2F;&#39;, train&#x3D;True, download&#x3D;True, transform&#x3D;transform)</span><br><span class="line">trainloader &#x3D; torch.utils.data.DataLoader(trainset, batch_size&#x3D;4, shuffle&#x3D;True, num_workers&#x3D;2)</span><br><span class="line"></span><br><span class="line">testset &#x3D; tv.datasets.CIFAR10(root&#x3D;&#39;D:&#x2F;work&#x2F;search_image&#x2F;torch&#x2F;dataset&#x2F;&#39;, train&#x3D;False, download&#x3D;True, transform&#x3D;transform)</span><br><span class="line">testloader &#x3D; torch.utils.data.DataLoader(testset, batch_size&#x3D;4, shuffle&#x3D;False, num_workers&#x3D;2)</span><br><span class="line"></span><br><span class="line">classes &#x3D; (&#39;plane&#39;, &#39;car&#39;, &#39;bird&#39;, &#39;cat&#39;, &#39;deer&#39;, &#39;dog&#39;, &#39;frog&#39;, &#39;horse&#39;, &#39;ship&#39;, &#39;truck&#39;)</span><br><span class="line"></span><br><span class="line">(data, label) &#x3D; trainset[100]</span><br><span class="line">print(classes[label])</span><br><span class="line">print(len(trainset))</span><br><span class="line">print(len(testset))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">Files already downloaded and verified</span><br><span class="line">Files already downloaded and verified</span><br><span class="line">ship</span><br><span class="line">50000</span><br><span class="line">10000</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Net_my(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        self.conv1  &#x3D; nn.Conv2d(3, 6, 5)</span><br><span class="line">        self.conv2  &#x3D; nn.Conv2d(6, 16, 5)</span><br><span class="line">        self.fc1    &#x3D; nn.Linear(16*5*5, 120)</span><br><span class="line">        self.fc2    &#x3D; nn.Linear(120, 84)</span><br><span class="line">        self.fc3    &#x3D; nn.Linear(84, 10)</span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        x &#x3D; F.max_pool2d(F.relu(self.conv1(x)), (2, 2))</span><br><span class="line">        x &#x3D; F.max_pool2d(F.relu(self.conv2(x)), 2)</span><br><span class="line">        x &#x3D; x.view(x.size()[0], -1)</span><br><span class="line">        x &#x3D; F.relu(self.fc1(x))</span><br><span class="line">        x &#x3D; F.relu(self.fc2(x))</span><br><span class="line"></span><br><span class="line">        x &#x3D; self.fc3(x)</span><br><span class="line"></span><br><span class="line">        return x</span><br></pre></td></tr></table></figure>
+<p>本来报错：</p>
+<blockquote>
+<p>class Net_my(nn.modules):<br>TypeError: module.<strong>init</strong>() takes at most 2 arguments (3 given)</p>
+</blockquote>
+<p>nn.modules -&gt; nn.Module就ok了。</p>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>报错</p>
+<blockquote>
+<p>BrokenPipeError: [Errno 32] Broken pipe</p>
+</blockquote>
+<p> 好像是win10的多线程导致的，需要避免windows使用多线程。把torch.utils.data.DataLoader()函数时的 num_workers 参数改成0。</p>
+<blockquote>
+<p>RuntimeError: Input type (torch.cuda.FloatTensor) and weight type (torch.FloatTensor) should be the same</p>
+</blockquote>
+<p>要么都是cpu，要么都是gpu，需要统一</p>
+<blockquote>
+<p>net.cuda()<br>device = torch.device(“cuda:0” if torch.cuda.is_available() else “cpu”)<br>#网络和输入的数据都需要转成gpu或者cpu。</p>
+</blockquote>
+<p>可以训练</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># net &#x3D; Net()</span><br><span class="line"># net.cuda()</span><br><span class="line"></span><br><span class="line"># from torch import optim</span><br><span class="line"># criterion &#x3D; nn.CrossEntropyLoss()</span><br><span class="line"># optimizer &#x3D; optim.SGD(net.parameters(), lr&#x3D;0.001, momentum&#x3D;0.9)</span><br><span class="line"># device &#x3D; torch.device(&quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;)</span><br><span class="line">#</span><br><span class="line"># torch.set_num_threads(8)</span><br><span class="line"># for epoch in range(10):</span><br><span class="line">#     running_loss &#x3D; 0.0</span><br><span class="line">#     total &#x3D; 0</span><br><span class="line">#     correct &#x3D; 0</span><br><span class="line">#     for i, data in enumerate(trainloader, 0):</span><br><span class="line">#         inputs, labels &#x3D; data</span><br><span class="line">#         inputs, labels &#x3D; inputs.to(device),labels.to(device)</span><br><span class="line">#</span><br><span class="line">#         optimizer.zero_grad()</span><br><span class="line">#         outputs &#x3D; net(inputs)</span><br><span class="line">#         loss &#x3D; criterion(outputs, labels)</span><br><span class="line">#         loss.backward()</span><br><span class="line">#</span><br><span class="line">#         optimizer.step()</span><br><span class="line">#</span><br><span class="line">#         running_loss +&#x3D; loss.item()</span><br><span class="line">#</span><br><span class="line">#         if i % 2000 &#x3D;&#x3D; 1999:</span><br><span class="line">#             print(&#39;[%d, %5d] loss: %.3f&#39; % (epoch+1, i+1, running_loss &#x2F; 2000))</span><br><span class="line">#             running_loss &#x3D; 0.0</span><br><span class="line">#             _, predicted &#x3D; torch.max(outputs, 1)</span><br><span class="line">#             total +&#x3D; labels.size(0)</span><br><span class="line">#             correct +&#x3D; (predicted &#x3D;&#x3D; labels).sum().item()</span><br><span class="line">#             print(&#39;accuracy of the network on the %d train images: %.3f %%&#39; % (total, 100.0 * correct &#x2F; total))</span><br><span class="line">#             total &#x3D; 0</span><br><span class="line">#             correct &#x3D; 0</span><br><span class="line">#</span><br><span class="line"># print(&#39;Finished Training&#39;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用预训练模型来图像分类"><a href="#使用预训练模型来图像分类" class="headerlink" title="使用预训练模型来图像分类"></a>使用预训练模型来图像分类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import torchvision as tv</span><br><span class="line">import torchvision.transforms as transforms</span><br><span class="line">from torchvision.transforms import ToPILImage</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.nn.functional as F</span><br><span class="line">import torch</span><br><span class="line">from torchvision import models</span><br><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">alexnet &#x3D; models.alexnet(pretrained&#x3D;True)</span><br><span class="line">print(alexnet)</span><br><span class="line"></span><br><span class="line">img &#x3D; Image.open(&#39;1.jpg&#39;)</span><br><span class="line"></span><br><span class="line">transform &#x3D; transforms.Compose([            #[1]</span><br><span class="line"> transforms.Resize(256),                    #[2]</span><br><span class="line"> transforms.CenterCrop(224),                #[3]</span><br><span class="line"> transforms.ToTensor(),                     #[4]</span><br><span class="line"> transforms.Normalize(                      #[5]</span><br><span class="line"> mean&#x3D;[0.485, 0.456, 0.406],                #[6]</span><br><span class="line"> std&#x3D;[0.229, 0.224, 0.225]                  #[7]</span><br><span class="line"> )])</span><br><span class="line"></span><br><span class="line">img_t &#x3D; transform(img)</span><br><span class="line">batch_t &#x3D; torch.unsqueeze(img_t, 0)</span><br><span class="line"></span><br><span class="line">alexnet.eval()</span><br><span class="line">out &#x3D; alexnet(batch_t)</span><br><span class="line"></span><br><span class="line">with open(&#39;imagenet_classes.txt&#39;) as f:</span><br><span class="line">    classes &#x3D; [line.strip() for line in f.readlines()]</span><br><span class="line"></span><br><span class="line">_, indices &#x3D; torch.sort(out, descending&#x3D;True)</span><br><span class="line">percentage &#x3D; torch.nn.functional.softmax(out, dim&#x3D;1)[0] * 100</span><br><span class="line">[print(classes[idx], percentage[idx].item()) for idx in indices[0][:5]]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输出</span><br><span class="line">655: &#39;miniskirt, mini&#39;, 10.492936134338379</span><br><span class="line">765: &#39;rocking chair, rocker&#39;, 4.194277286529541</span><br><span class="line">545: &#39;electric fan, blower&#39;, 4.150004863739014</span><br><span class="line">411: &#39;apron&#39;, 2.946284532546997</span><br><span class="line">589: &#39;hand blower, blow dryer, blow drier, hair dryer, hair drier&#39;, 2.749168872833252</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
             </div>
             <hr/>
@@ -550,12 +584,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Pytorch/">
-                                    <span class="chip bg-color">Pytorch</span>
-                                </a>
-                            
                                 <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
                                     <span class="chip bg-color">图像处理</span>
+                                </a>
+                            
+                                <a href="/tags/Pytorch/">
+                                    <span class="chip bg-color">Pytorch</span>
                                 </a>
                             
                         </div>
@@ -1028,12 +1062,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Pytorch/">
-                        <span class="chip bg-color">Pytorch</span>
-                    </a>
-                    
                     <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
                         <span class="chip bg-color">图像处理</span>
+                    </a>
+                    
+                    <a href="/tags/Pytorch/">
+                        <span class="chip bg-color">Pytorch</span>
                     </a>
                     
                 </div>
@@ -1081,12 +1115,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
-                        <span class="chip bg-color">图像处理</span>
-                    </a>
-                    
                     <a href="/tags/%E5%9B%BE%E5%83%8F%E6%8F%8F%E8%BF%B0/">
                         <span class="chip bg-color">图像描述</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                        <span class="chip bg-color">图像处理</span>
                     </a>
                     
                 </div>
