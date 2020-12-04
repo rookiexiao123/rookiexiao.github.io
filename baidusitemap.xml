@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://xiaohongzhong.top/2020/12/03/neuraltalk2/</loc>
+    <lastmod>2020-12-04</lastmod>
+  </url>
+  <url>
     <loc>http://xiaohongzhong.top/2020/11/23/conda-de-shi-yong/</loc>
-    <lastmod>2020-11-27</lastmod>
+    <lastmod>2020-12-04</lastmod>
+  </url>
+  <url>
+    <loc>http://xiaohongzhong.top/2020/12/04/tu-xiang-fen-lei-cifar10-pytorch/</loc>
+    <lastmod>2020-12-04</lastmod>
+  </url>
+  <url>
+    <loc>http://xiaohongzhong.top/2020/11/19/kai-fa-gong-ju/</loc>
+    <lastmod>2020-12-04</lastmod>
   </url>
   <url>
     <loc>http://xiaohongzhong.top/2020/11/26/supervisor-scrapy-python/</loc>
     <lastmod>2020-11-26</lastmod>
   </url>
   <url>
-    <loc>http://xiaohongzhong.top/2020/11/25/paddle-xue-xi/</loc>
-    <lastmod>2020-11-26</lastmod>
-  </url>
-  <url>
     <loc>http://xiaohongzhong.top/2020/11/18/hello-world/</loc>
-    <lastmod>2020-11-22</lastmod>
-  </url>
-  <url>
-    <loc>http://xiaohongzhong.top/2020/11/19/zhuang-bei-lan/</loc>
-    <lastmod>2020-11-22</lastmod>
-  </url>
-  <url>
-    <loc>http://xiaohongzhong.top/2020/11/18/huan-you-30-miao-dao-da-zhan-chang/</loc>
-    <lastmod>2020-11-22</lastmod>
-  </url>
-  <url>
-    <loc>http://xiaohongzhong.top/2020/11/22/chu-shi-pytorch/</loc>
     <lastmod>2020-11-22</lastmod>
   </url>
 </urlset> 
