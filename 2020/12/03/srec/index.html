@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="neuraltalk2, 小骨子还在努力">
+    <meta name="keywords" content="跑通图像压缩算法SReC, 小骨子还在努力">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>neuraltalk2 | 小骨子还在努力</title>
+    <title>跑通图像压缩算法SReC | 小骨子还在努力</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">neuraltalk2</h1>
+                    <h1 class="description center-align post-title">跑通图像压缩算法SReC</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%9B%BE%E5%83%8F%E6%8F%8F%E8%BF%B0/">
-                                <span class="chip bg-color">图像描述</span>
+                            <a href="/tags/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9/">
+                                <span class="chip bg-color">图像压缩</span>
                             </a>
                         
                             <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
@@ -469,7 +469,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    167
+                    138
                 </div>
                 
 
@@ -486,13 +486,21 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">源码位置：https:&#x2F;&#x2F;github.com&#x2F;karpathy&#x2F;neuraltalk2</span><br></pre></td></tr></table></figure>
+                <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">源码位置：https:&#x2F;&#x2F;github.com&#x2F;caoscott&#x2F;SReC</span><br></pre></td></tr></table></figure>
 
-<p>安装luarocks<br>wget <a target="_blank" rel="noopener" href="https://luarocks.org/releases/luarocks-3.3.1.tar.gz">https://luarocks.org/releases/luarocks-3.3.1.tar.gz</a><br>报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">--2020-12-03 14:46:16--  https:&#x2F;&#x2F;luarocks.org&#x2F;releases&#x2F;luarocks-3.3.1.tar.gz</span><br><span class="line">Resolving luarocks.org... 45.33.61.132</span><br><span class="line">Connecting to luarocks.org|45.33.61.132|:443... connected.</span><br><span class="line">ERROR: cannot verify luarocks.org&#39;s certificate, issued by &#96;&#x2F;C&#x3D;US&#x2F;O&#x3D;Let&#39;s Encryp</span><br><span class="line">t&#x2F;CN&#x3D;Let&#39;s Encrypt Authority X3&#39;:</span><br><span class="line">  Unable to locally verify the issuer&#39;s authority.</span><br><span class="line">To connect to luarocks.org insecurely, use &#96;--no-check-certificate&#39;.</span><br><span class="line">Unable to establish SSL connection.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>之后没有用命令，而是在<a target="_blank" rel="noopener" href="https://luarocks.github.io/luarocks/releases/%E4%B8%8B%E8%BD%BD%E7%9A%84windows%E7%89%88%E6%9C%AC">https://luarocks.github.io/luarocks/releases/下载的windows版本</a></p>
-<p>finally, 没有跑起来，因为不会搞lua和luarocks，软件也没有装的起来。</p>
+<h3 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h3><p>git clone <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#x74;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#x74;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a>:caoscott/SReC.git</p>
+<h3 id="搭建环境，使用的是没有nvidia-docker的方法"><a href="#搭建环境，使用的是没有nvidia-docker的方法" class="headerlink" title="搭建环境，使用的是没有nvidia-docker的方法"></a>搭建环境，使用的是没有nvidia-docker的方法</h3><p>我是已经装了torch1.5.0 + torchvision0.6.0 + gpu的环境，接下来</p>
+<ol>
+<li><p>pip install -r requirements.txt</p>
+</li>
+<li><p>安装gcc，参考的是这个大佬的文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/qilimi1053620912/article/details/88573017">https://blog.csdn.net/qilimi1053620912/article/details/88573017</a><br>在windows10上安装gcc。</p>
+</li>
+<li><p>运行COMPILE_CUDA=force python3 setup.py install，报错</p>
+<blockquote>
+<p>error: command ‘C:\Program Files (x86)\Microsoft Visual Studio\2017\Communit<br>y\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\cl.exe’ failed with exit sta<br>tus 2</p>
+</blockquote>
+</li>
+</ol>
 
             </div>
             <hr/>
@@ -518,7 +526,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://xiaohongzhong.top/2020/12/03/neuraltalk2/">http://xiaohongzhong.top/2020/12/03/neuraltalk2/</a>
+                    <a href="http://xiaohongzhong.top/2020/12/03/srec/">http://xiaohongzhong.top/2020/12/03/srec/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -556,8 +564,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%9B%BE%E5%83%8F%E6%8F%8F%E8%BF%B0/">
-                                    <span class="chip bg-color">图像描述</span>
+                                <a href="/tags/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9/">
+                                    <span class="chip bg-color">图像压缩</span>
                                 </a>
                             
                                 <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">

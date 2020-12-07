@@ -6,7 +6,7 @@
   <link href="http://xiaohongzhong.top/atom.xml" rel="self"/>
   
   <link href="http://xiaohongzhong.top/"/>
-  <updated>2020-12-04T08:45:24.678Z</updated>
+  <updated>2020-12-07T06:47:04.001Z</updated>
   <id>http://xiaohongzhong.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://xiaohongzhong.top/2020/12/04/tu-xiang-fen-lei-cifar10-pytorch/"/>
     <id>http://xiaohongzhong.top/2020/12/04/tu-xiang-fen-lei-cifar10-pytorch/</id>
     <published>2020-12-04T02:13:46.000Z</published>
-    <updated>2020-12-04T08:45:24.678Z</updated>
+    <updated>2020-12-07T06:47:04.001Z</updated>
     
     
       
@@ -44,11 +44,11 @@
   </entry>
   
   <entry>
-    <title>neuraltalk2</title>
-    <link href="http://xiaohongzhong.top/2020/12/03/neuraltalk2/"/>
-    <id>http://xiaohongzhong.top/2020/12/03/neuraltalk2/</id>
+    <title>跑通图像压缩算法SReC</title>
+    <link href="http://xiaohongzhong.top/2020/12/03/srec/"/>
+    <id>http://xiaohongzhong.top/2020/12/03/srec/</id>
     <published>2020-12-03T06:41:52.000Z</published>
-    <updated>2020-12-04T02:20:19.000Z</updated>
+    <updated>2020-12-07T06:03:07.065Z</updated>
     
     
       
@@ -64,7 +64,7 @@
     <category term="跑过的算法" scheme="http://xiaohongzhong.top/categories/%E8%B7%91%E8%BF%87%E7%9A%84%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="图像描述" scheme="http://xiaohongzhong.top/tags/%E5%9B%BE%E5%83%8F%E6%8F%8F%E8%BF%B0/"/>
+    <category term="图像压缩" scheme="http://xiaohongzhong.top/tags/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9/"/>
     
     <category term="图像处理" scheme="http://xiaohongzhong.top/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
