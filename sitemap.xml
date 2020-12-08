@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://xiaohongzhong.top/2020/11/26/supervisor-scrapy-python/</loc>
+    <loc>http://xiaohongzhong.top/2020/12/08/shen-du-xue-xi-zhi-ji-suan-ji-shi-jue-gai-nian/</loc>
     
     <lastmod>2020-12-08</lastmod>
     
@@ -23,6 +23,13 @@
   </url>
   
   <url>
+    <loc>http://xiaohongzhong.top/2020/11/26/supervisor-scrapy-python/</loc>
+    
+    <lastmod>2020-12-08</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://xiaohongzhong.top/2020/12/04/tu-xiang-fen-lei-cifar10-pytorch/</loc>
     
     <lastmod>2020-12-08</lastmod>
@@ -31,13 +38,6 @@
   
   <url>
     <loc>http://xiaohongzhong.top/2020/11/19/kai-fa-gong-ju/</loc>
-    
-    <lastmod>2020-12-08</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xiaohongzhong.top/2020/12/08/shen-du-xue-xi-zhi-ji-suan-ji-shi-jue-gai-nian/</loc>
     
     <lastmod>2020-12-08</lastmod>
     
@@ -116,13 +116,6 @@
   </url>
   
   <url>
-    <loc>http://xiaohongzhong.top/tags/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2020-12-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://xiaohongzhong.top/tags/Pytorch/</loc>
     <lastmod>2020-12-08</lastmod>
     <changefreq>daily</changefreq>
@@ -131,6 +124,13 @@
   
   <url>
     <loc>http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2020-12-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://xiaohongzhong.top/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2020-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
