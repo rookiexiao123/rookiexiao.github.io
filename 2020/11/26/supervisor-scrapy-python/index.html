@@ -30,7 +30,8 @@
     <script src="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/libs/jquery/jquery.min.js"></script>
 
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="小骨子还在努力" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -531,7 +532,9 @@
 <blockquote>
 <p>scrapy是命令行，怎么在代码里面添加？</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#cmdline.execute([&quot;scrapy&quot;, &quot;crawl&quot;, &quot;search&quot;, &quot;-a&quot;, &quot;start_date&#x3D;%s&quot;%(start_date), &quot;-a&quot;, &quot;end_date&#x3D;%s&quot;%(end_date), &quot;-a&quot;, &quot;keyword_list&#x3D;%s&quot;%(keyword)])</span><br><span class="line">cmd &#x3D; &quot;&#x2F;usr&#x2F;local&#x2F;data&#x2F;anaconda3&#x2F;envs&#x2F;snakes&#x2F;bin&#x2F;scrapy crawl search -a &quot; + &quot;start_date&#x3D;%s&quot;%(start_date) + &quot; -a &quot; + &quot;end_date&#x3D;%s&quot;%(end_date) + &quot; -a &quot; + &quot;keyword_list&#x3D;%s&quot;%(keyword)</span><br><span class="line">os.system(cmd)</span><br></pre></td></tr></table></figure>
+<pre><code>#cmdline.execute([&quot;scrapy&quot;, &quot;crawl&quot;, &quot;search&quot;, &quot;-a&quot;, &quot;start_date=%s&quot;%(start_date), &quot;-a&quot;, &quot;end_date=%s&quot;%(end_date), &quot;-a&quot;, &quot;keyword_list=%s&quot;%(keyword)])
+cmd = &quot;/usr/local/data/anaconda3/envs/snakes/bin/scrapy crawl search -a &quot; + &quot;start_date=%s&quot;%(start_date) + &quot; -a &quot; + &quot;end_date=%s&quot;%(end_date) + &quot; -a &quot; + &quot;keyword_list=%s&quot;%(keyword)
+os.system(cmd)</code></pre>
 <blockquote>
 <p>开启的http服务，客户请求爬虫，怎么把数据返回？</p>
 </blockquote>
@@ -548,8 +551,16 @@
 <p>是csv转成json，还是直接爬取pipeline到json</p>
 </blockquote>
 <p>我选择了后者，爬取了json格式的文件下来，包括id，bid，picurl组成的json格式的数据。<br>一开始json格式还写不进去，应该是格式问题，我弄了data格式，之后ok了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">with codecs.open(jsonfile_path, &#39;a+&#39;) as f:</span><br><span class="line">    data &#x3D; &#123;</span><br><span class="line">    &#39;id&#39;: item[&#39;weibo&#39;][&#39;user_id&#39;],</span><br><span class="line">    &#39;bid&#39;: item[&#39;weibo&#39;][&#39;bid&#39;],</span><br><span class="line">    &#39;screen_name&#39;: item[&#39;weibo&#39;][&#39;screen_name&#39;],</span><br><span class="line">    &#39;pics&#39;: item[&#39;weibo&#39;][&#39;pics&#39;]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    lines &#x3D; json.dumps(data, ensure_ascii&#x3D;False)</span><br><span class="line">    f.write(lines + &quot;\n&quot;)</span><br></pre></td></tr></table></figure>
+<pre><code>with codecs.open(jsonfile_path, &#39;a+&#39;) as f:
+    data = &#123;
+    &#39;id&#39;: item[&#39;weibo&#39;][&#39;user_id&#39;],
+    &#39;bid&#39;: item[&#39;weibo&#39;][&#39;bid&#39;],
+    &#39;screen_name&#39;: item[&#39;weibo&#39;][&#39;screen_name&#39;],
+    &#39;pics&#39;: item[&#39;weibo&#39;][&#39;pics&#39;]
+    &#125;
 
+    lines = json.dumps(data, ensure_ascii=False)
+    f.write(lines + &quot;\n&quot;)</code></pre>
 <blockquote>
 <p>然后也出现supervisor一直重启的问题</p>
 </blockquote>
