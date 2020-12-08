@@ -9,13 +9,6 @@
   </url>
   
   <url>
-    <loc>http://xiaohongzhong.top/2020/11/18/hello-world/</loc>
-    
-    <lastmod>2020-12-08</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://xiaohongzhong.top/2020/11/26/supervisor-scrapy-python/</loc>
     
     <lastmod>2020-12-08</lastmod>
@@ -25,7 +18,14 @@
   <url>
     <loc>http://xiaohongzhong.top/2020/12/03/srec/</loc>
     
-    <lastmod>2020-12-07</lastmod>
+    <lastmod>2020-12-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xiaohongzhong.top/2020/11/18/hello-world/</loc>
+    
+    <lastmod>2020-12-08</lastmod>
     
   </url>
   
@@ -81,13 +81,6 @@
 
   
   <url>
-    <loc>http://xiaohongzhong.top/tags/anaconda/</loc>
-    <lastmod>2020-12-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://xiaohongzhong.top/tags/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9/</loc>
     <lastmod>2020-12-08</lastmod>
     <changefreq>daily</changefreq>
@@ -96,6 +89,13 @@
   
   <url>
     <loc>http://xiaohongzhong.top/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2020-12-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://xiaohongzhong.top/tags/anaconda/</loc>
     <lastmod>2020-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -132,14 +132,14 @@
 
   
   <url>
-    <loc>http://xiaohongzhong.top/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
+    <loc>http://xiaohongzhong.top/categories/%E8%B7%91%E8%BF%87%E7%9A%84%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2020-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://xiaohongzhong.top/categories/%E8%B7%91%E8%BF%87%E7%9A%84%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://xiaohongzhong.top/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2020-12-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
