@@ -6,7 +6,7 @@
   <link href="http://xiaohongzhong.top/atom.xml" rel="self"/>
   
   <link href="http://xiaohongzhong.top/"/>
-  <updated>2020-12-08T01:53:40.916Z</updated>
+  <updated>2020-12-08T02:15:25.237Z</updated>
   <id>http://xiaohongzhong.top/</id>
   
   <author>
@@ -21,16 +21,10 @@
     <link href="http://xiaohongzhong.top/2020/12/04/tu-xiang-fen-lei-cifar10-pytorch/"/>
     <id>http://xiaohongzhong.top/2020/12/04/tu-xiang-fen-lei-cifar10-pytorch/</id>
     <published>2020-12-04T02:13:46.000Z</published>
-    <updated>2020-12-08T01:53:40.916Z</updated>
+    <updated>2020-12-08T02:15:25.237Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
+    <summary type="html">&lt;p&gt;想要使用pytorch，就从最基础的图像分类，也是最熟悉的图像分类开始。&lt;/p&gt;</summary>
     
     
     
@@ -75,7 +69,7 @@
     <link href="http://xiaohongzhong.top/2020/11/26/supervisor-scrapy-python/"/>
     <id>http://xiaohongzhong.top/2020/11/26/supervisor-scrapy-python/</id>
     <published>2020-11-26T06:42:57.000Z</published>
-    <updated>2020-11-26T09:57:28.253Z</updated>
+    <updated>2020-12-08T02:14:26.117Z</updated>
     
     
       
@@ -140,7 +134,7 @@
     <link href="http://xiaohongzhong.top/2020/11/18/hello-world/"/>
     <id>http://xiaohongzhong.top/2020/11/18/hello-world/</id>
     <published>2020-11-18T02:11:54.000Z</published>
-    <updated>2020-11-22T15:34:12.000Z</updated>
+    <updated>2020-12-08T02:14:34.689Z</updated>
     
     
     <summary type="html">Hello World</summary>
