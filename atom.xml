@@ -6,7 +6,7 @@
   <link href="http://xiaohongzhong.top/atom.xml" rel="self"/>
   
   <link href="http://xiaohongzhong.top/"/>
-  <updated>2020-12-08T03:00:23.890Z</updated>
+  <updated>2020-12-08T03:01:40.496Z</updated>
   <id>http://xiaohongzhong.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://xiaohongzhong.top/2020/12/04/tu-xiang-fen-lei-cifar10-pytorch/"/>
     <id>http://xiaohongzhong.top/2020/12/04/tu-xiang-fen-lei-cifar10-pytorch/</id>
     <published>2020-12-04T02:13:46.000Z</published>
-    <updated>2020-12-08T03:00:23.890Z</updated>
+    <updated>2020-12-08T03:01:40.496Z</updated>
     
     
     <summary type="html">&lt;p&gt;想要使用pytorch，就从最基础的图像分类，也是最熟悉的图像分类开始。&lt;/p&gt;</summary>
@@ -34,6 +34,8 @@
     <category term="图像处理" scheme="http://xiaohongzhong.top/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
     <category term="Pytorch" scheme="http://xiaohongzhong.top/tags/Pytorch/"/>
+    
+    <category term="深度学习" scheme="http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
