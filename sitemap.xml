@@ -123,6 +123,13 @@
   </url>
   
   <url>
+    <loc>http://xiaohongzhong.top/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2020-12-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://xiaohongzhong.top/tags/Pytorch/</loc>
     <lastmod>2020-12-09</lastmod>
     <changefreq>daily</changefreq>
@@ -131,13 +138,6 @@
   
   <url>
     <loc>http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2020-12-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://xiaohongzhong.top/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2020-12-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
