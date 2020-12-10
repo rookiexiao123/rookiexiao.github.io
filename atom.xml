@@ -6,7 +6,7 @@
   <link href="http://xiaohongzhong.top/atom.xml" rel="self"/>
   
   <link href="http://xiaohongzhong.top/"/>
-  <updated>2020-12-10T03:13:08.304Z</updated>
+  <updated>2020-12-10T03:43:56.921Z</updated>
   <id>http://xiaohongzhong.top/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>几种经典网络的简单记录</title>
-    <link href="http://xiaohongzhong.top/2020/12/10/ji-chong-jing-dian-wang-luo-de-jian-dan-ji-lu/"/>
-    <id>http://xiaohongzhong.top/2020/12/10/ji-chong-jing-dian-wang-luo-de-jian-dan-ji-lu/</id>
+    <title>网络VGG的简单记录</title>
+    <link href="http://xiaohongzhong.top/2020/12/10/wang-luo-vgg-de-jian-dan-ji-lu/"/>
+    <id>http://xiaohongzhong.top/2020/12/10/wang-luo-vgg-de-jian-dan-ji-lu/</id>
     <published>2020-12-10T01:51:06.000Z</published>
-    <updated>2020-12-10T03:13:08.304Z</updated>
+    <updated>2020-12-10T03:43:56.921Z</updated>
     
     
       
@@ -37,9 +37,9 @@
     <category term="深度学习" scheme="http://xiaohongzhong.top/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
-    <category term="经典神经网络" scheme="http://xiaohongzhong.top/tags/%E7%BB%8F%E5%85%B8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
     <category term="深度学习" scheme="http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="经典神经网络" scheme="http://xiaohongzhong.top/tags/%E7%BB%8F%E5%85%B8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
@@ -66,9 +66,9 @@
     
     <category term="图像处理" scheme="http://xiaohongzhong.top/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
-    <category term="深度学习" scheme="http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
     <category term="Pytorch" scheme="http://xiaohongzhong.top/tags/Pytorch/"/>
+    
+    <category term="深度学习" scheme="http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -120,9 +120,9 @@
     
     <category term="图像处理" scheme="http://xiaohongzhong.top/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
-    <category term="深度学习" scheme="http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
     <category term="Pytorch" scheme="http://xiaohongzhong.top/tags/Pytorch/"/>
+    
+    <category term="深度学习" scheme="http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

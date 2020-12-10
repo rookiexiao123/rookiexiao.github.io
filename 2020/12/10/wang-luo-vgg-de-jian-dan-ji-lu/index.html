@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="几种经典网络的简单记录, 小骨子还在努力">
+    <meta name="keywords" content="网络VGG的简单记录, 小骨子还在努力">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>几种经典网络的简单记录 | 小骨子还在努力</title>
+    <title>网络VGG的简单记录 | 小骨子还在努力</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">几种经典网络的简单记录</h1>
+                    <h1 class="description center-align post-title">网络VGG的简单记录</h1>
                 </div>
             </div>
         </div>
@@ -432,12 +432,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%BB%8F%E5%85%B8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-                                <span class="chip bg-color">经典神经网络</span>
-                            </a>
-                        
                             <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
                                 <span class="chip bg-color">深度学习</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BB%8F%E5%85%B8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">经典神经网络</span>
                             </a>
                         
                     </div>
@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    962
+                    1.1k
                 </div>
                 
 
@@ -489,7 +489,7 @@
             <div id="articleContent">
                 <h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3><p><img src="https://pic.downk.cc/item/5fd1883c3ffa7d37b3e47e27.png"></p>
 <p><img src="https://pic.downk.cc/item/5fd18a733ffa7d37b3e68fc2.png"></p>
-<p>以第一处卷积为例<br>VGG19 卷积层默认的stride是(1, 1)<br>填充方式是same，说明输入的大小和输出的大小一样，都是224<br>卷积核越大，计算量暴增，不利于模型深度的增加，计算性能也会降低。</p>
+<p>以第一处卷积为例<br>VGG19 卷积层默认的stride是(1, 1)<br>填充方式是same，说明输入的大小和输出的大小一样，都是224<br>卷积核越大，计算量暴增，不利于模型深度的增加，计算性能也会降低。<br>以第一处池化为例<br>MaxPooling2D的padding默认是valid<br>输出大小= (224 - (pool_size=2) + 2 * (p=0)) / (stride=2) + 1 = (224 - 2 + 0)/2 + 1 = 112</p>
 <p> <strong>keras下的vgg19代码</strong></p>
 <pre><code># -*- coding: utf-8 -*-
 &quot;&quot;&quot;VGG19 model for Keras.
@@ -645,6 +645,12 @@ def VGG19(include_top=True, weights=&#39;imagenet&#39;,
 
     return model
 </code></pre>
+<p><img src="https://pic.downk.cc/item/5fd198893ffa7d37b3f5554c.png"></p>
+<ol>
+<li>3x3是最小的能够捕获像素八邻域信息的尺寸。</li>
+<li>两个3x3的堆叠卷基层的有限感受野是5x5；三个3x3的堆叠卷基层的感受野是7x7，故可以通过小尺寸卷积层的堆叠替代大尺寸卷积层，并且感受野大小不变。</li>
+<li>多个3x3的卷基层比一个大尺寸filter卷基层有更多的非线性（更多层的非线性函数），使得判决函数更加具有判决性。</li>
+</ol>
 
             </div>
             <hr/>
@@ -670,7 +676,7 @@ def VGG19(include_top=True, weights=&#39;imagenet&#39;,
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://xiaohongzhong.top/2020/12/10/ji-chong-jing-dian-wang-luo-de-jian-dan-ji-lu/">http://xiaohongzhong.top/2020/12/10/ji-chong-jing-dian-wang-luo-de-jian-dan-ji-lu/</a>
+                    <a href="http://xiaohongzhong.top/2020/12/10/wang-luo-vgg-de-jian-dan-ji-lu/">http://xiaohongzhong.top/2020/12/10/wang-luo-vgg-de-jian-dan-ji-lu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -708,12 +714,12 @@ def VGG19(include_top=True, weights=&#39;imagenet&#39;,
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%BB%8F%E5%85%B8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-                                    <span class="chip bg-color">经典神经网络</span>
-                                </a>
-                            
                                 <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
                                     <span class="chip bg-color">深度学习</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BB%8F%E5%85%B8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">经典神经网络</span>
                                 </a>
                             
                         </div>
@@ -1151,19 +1157,19 @@ def VGG19(include_top=True, weights=&#39;imagenet&#39;,
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2020/12/10/ji-chong-jing-dian-wang-luo-de-jian-dan-ji-lu/">
+                <a href="/2020/12/10/wang-luo-vgg-de-jian-dan-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/19.jpg" class="responsive-img" alt="几种经典网络的简单记录">
+                        <img src="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/21.jpg" class="responsive-img" alt="网络VGG的简单记录">
                         
-                        <span class="card-title">几种经典网络的简单记录</span>
+                        <span class="card-title">网络VGG的简单记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            记录几种神经网络的知识点
+                            记录网络VGG的知识点
                         
                     </div>
                     <div class="publish-info">
@@ -1186,12 +1192,12 @@ def VGG19(include_top=True, weights=&#39;imagenet&#39;,
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%BB%8F%E5%85%B8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">经典神经网络</span>
-                    </a>
-                    
                     <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
                         <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BB%8F%E5%85%B8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">经典神经网络</span>
                     </a>
                     
                 </div>
@@ -1243,12 +1249,12 @@ def VGG19(include_top=True, weights=&#39;imagenet&#39;,
                         <span class="chip bg-color">图像处理</span>
                     </a>
                     
-                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">深度学习</span>
-                    </a>
-                    
                     <a href="/tags/Pytorch/">
                         <span class="chip bg-color">Pytorch</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
                     </a>
                     
                 </div>
