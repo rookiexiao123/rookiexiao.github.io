@@ -470,7 +470,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1
+                    962
                 </div>
                 
 
@@ -487,7 +487,164 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rPj3UH"><img src="" alt="vgg"></a></p>
+                <h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3><p><img src="https://pic.downk.cc/item/5fd1883c3ffa7d37b3e47e27.png"></p>
+<p><img src="https://pic.downk.cc/item/5fd18a733ffa7d37b3e68fc2.png"></p>
+<p>以第一处卷积为例<br>VGG19 卷积层默认的stride是(1, 1)<br>填充方式是same，说明输入的大小和输出的大小一样，都是224<br>卷积核越大，计算量暴增，不利于模型深度的增加，计算性能也会降低。</p>
+<p> <strong>keras下的vgg19代码</strong></p>
+<pre><code># -*- coding: utf-8 -*-
+&quot;&quot;&quot;VGG19 model for Keras.
+
+# Reference
+
+- [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/abs/1409.1556)
+
+&quot;&quot;&quot;
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+import os
+import warnings
+
+from ..models import Model
+from ..layers import Flatten
+from ..layers import Dense
+from ..layers import Input
+from ..layers import Conv2D
+from ..layers import MaxPooling2D
+from ..layers import GlobalAveragePooling2D
+from ..layers import GlobalMaxPooling2D
+from ..engine.topology import get_source_inputs
+from ..utils import layer_utils
+from ..utils.data_utils import get_file
+from .. import backend as K
+from .imagenet_utils import decode_predictions
+from .imagenet_utils import preprocess_input
+from .imagenet_utils import _obtain_input_shape
+
+
+WEIGHTS_PATH = &#39;https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg19_weights_tf_dim_ordering_tf_kernels.h5&#39;
+WEIGHTS_PATH_NO_TOP = &#39;https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5&#39;
+
+
+def VGG19(include_top=True, weights=&#39;imagenet&#39;,
+          input_tensor=None, input_shape=None,
+          pooling=None,
+          classes=1000):
+
+    if not (weights in &#123;&#39;imagenet&#39;, None&#125; or os.path.exists(weights)):
+        raise ValueError(&#39;The `weights` argument should be either &#39;
+                         &#39;`None` (random initialization), `imagenet` &#39;
+                         &#39;(pre-training on ImageNet), &#39;
+                         &#39;or the path to the weights file to be loaded.&#39;)
+
+    if weights == &#39;imagenet&#39; and include_top and classes != 1000:
+        raise ValueError(&#39;If using `weights` as imagenet with `include_top`&#39;
+                         &#39; as true, `classes` should be 1000&#39;)
+    # Determine proper input shape
+    input_shape = _obtain_input_shape(input_shape,
+                                      default_size=224,
+                                      min_size=48,
+                                      data_format=K.image_data_format(),
+                                      require_flatten=include_top,
+                                      weights=weights)
+
+    if input_tensor is None:
+        img_input = Input(shape=input_shape)
+    else:
+        if not K.is_keras_tensor(input_tensor):
+            img_input = Input(tensor=input_tensor, shape=input_shape)
+        else:
+            img_input = input_tensor
+    # Block 1
+    x = Conv2D(64, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block1_conv1&#39;)(img_input)
+    x = Conv2D(64, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block1_conv2&#39;)(x)
+    x = MaxPooling2D((2, 2), strides=(2, 2), name=&#39;block1_pool&#39;)(x)
+
+    # Block 2
+    x = Conv2D(128, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block2_conv1&#39;)(x)
+    x = Conv2D(128, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block2_conv2&#39;)(x)
+    x = MaxPooling2D((2, 2), strides=(2, 2), name=&#39;block2_pool&#39;)(x)
+
+    # Block 3
+    x = Conv2D(256, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block3_conv1&#39;)(x)
+    x = Conv2D(256, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block3_conv2&#39;)(x)
+    x = Conv2D(256, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block3_conv3&#39;)(x)
+    x = Conv2D(256, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block3_conv4&#39;)(x)
+    x = MaxPooling2D((2, 2), strides=(2, 2), name=&#39;block3_pool&#39;)(x)
+
+    # Block 4
+    x = Conv2D(512, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block4_conv1&#39;)(x)
+    x = Conv2D(512, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block4_conv2&#39;)(x)
+    x = Conv2D(512, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block4_conv3&#39;)(x)
+    x = Conv2D(512, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block4_conv4&#39;)(x)
+    x = MaxPooling2D((2, 2), strides=(2, 2), name=&#39;block4_pool&#39;)(x)
+
+    # Block 5
+    x = Conv2D(512, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block5_conv1&#39;)(x)
+    x = Conv2D(512, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block5_conv2&#39;)(x)
+    x = Conv2D(512, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block5_conv3&#39;)(x)
+    x = Conv2D(512, (3, 3), activation=&#39;relu&#39;, padding=&#39;same&#39;, name=&#39;block5_conv4&#39;)(x)
+    x = MaxPooling2D((2, 2), strides=(2, 2), name=&#39;block5_pool&#39;)(x)
+
+    if include_top:
+        # Classification block
+        x = Flatten(name=&#39;flatten&#39;)(x)
+        x = Dense(4096, activation=&#39;relu&#39;, name=&#39;fc1&#39;)(x)
+        x = Dense(4096, activation=&#39;relu&#39;, name=&#39;fc2&#39;)(x)
+        x = Dense(classes, activation=&#39;softmax&#39;, name=&#39;predictions&#39;)(x)
+    else:
+        if pooling == &#39;avg&#39;:
+            x = GlobalAveragePooling2D()(x)
+        elif pooling == &#39;max&#39;:
+            x = GlobalMaxPooling2D()(x)
+
+    # Ensure that the model takes into account
+    # any potential predecessors of `input_tensor`.
+    if input_tensor is not None:
+        inputs = get_source_inputs(input_tensor)
+    else:
+        inputs = img_input
+    # Create model.
+    model = Model(inputs, x, name=&#39;vgg19&#39;)
+
+    # load weights
+    if weights == &#39;imagenet&#39;:
+        if include_top:
+            weights_path = get_file(&#39;vgg19_weights_tf_dim_ordering_tf_kernels.h5&#39;,
+                                    WEIGHTS_PATH,
+                                    cache_subdir=&#39;models&#39;,
+                                    file_hash=&#39;cbe5617147190e668d6c5d5026f83318&#39;)
+        else:
+            weights_path = get_file(&#39;vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5&#39;,
+                                    WEIGHTS_PATH_NO_TOP,
+                                    cache_subdir=&#39;models&#39;,
+                                    file_hash=&#39;253f8cb515780f3b799900260a226db6&#39;)
+        model.load_weights(weights_path)
+        if K.backend() == &#39;theano&#39;:
+            layer_utils.convert_all_kernels_in_model(model)
+
+        if K.image_data_format() == &#39;channels_first&#39;:
+            if include_top:
+                maxpool = model.get_layer(name=&#39;block5_pool&#39;)
+                shape = maxpool.output_shape[1:]
+                dense = model.get_layer(name=&#39;fc1&#39;)
+                layer_utils.convert_dense_weights_data_format(dense, shape, &#39;channels_first&#39;)
+
+            if K.backend() == &#39;tensorflow&#39;:
+                warnings.warn(&#39;You are using the TensorFlow backend, yet you &#39;
+                              &#39;are using the Theano &#39;
+                              &#39;image data format convention &#39;
+                              &#39;(`image_data_format=&quot;channels_first&quot;`). &#39;
+                              &#39;For best performance, set &#39;
+                              &#39;`image_data_format=&quot;channels_last&quot;` in &#39;
+                              &#39;your Keras config &#39;
+                              &#39;at ~/.keras/keras.json.&#39;)
+    elif weights is not None:
+        model.load_weights(weights)
+
+    return model
+</code></pre>
 
             </div>
             <hr/>
