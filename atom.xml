@@ -6,7 +6,7 @@
   <link href="http://xiaohongzhong.top/atom.xml" rel="self"/>
   
   <link href="http://xiaohongzhong.top/"/>
-  <updated>2020-12-10T10:03:38.141Z</updated>
+  <updated>2020-12-11T08:17:12.918Z</updated>
   <id>http://xiaohongzhong.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python读写json使用经验</title>
+    <link href="http://xiaohongzhong.top/2020/12/11/python-du-xie-json-shi-yong-jing-yan/"/>
+    <id>http://xiaohongzhong.top/2020/12/11/python-du-xie-json-shi-yong-jing-yan/</id>
+    <published>2020-12-11T06:42:44.000Z</published>
+    <updated>2020-12-11T08:17:12.918Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="Python使用" scheme="http://xiaohongzhong.top/categories/Python%E4%BD%BF%E7%94%A8/"/>
+    
+    
+    <category term="python使用" scheme="http://xiaohongzhong.top/tags/python%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>贝叶斯算法的简单记录</title>

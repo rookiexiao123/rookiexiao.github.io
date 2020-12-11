@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="贝叶斯算法的简单记录, 小骨子还在努力">
+    <meta name="keywords" content="python读写json使用经验, 小骨子还在努力">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>贝叶斯算法的简单记录 | 小骨子还在努力</title>
+    <title>python读写json使用经验 | 小骨子还在努力</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">贝叶斯算法的简单记录</h1>
+                    <h1 class="description center-align post-title">python读写json使用经验</h1>
                 </div>
             </div>
         </div>
@@ -430,12 +430,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/python%E4%BD%BF%E7%94%A8/">
+                                <span class="chip bg-color">python使用</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Python%E4%BD%BF%E7%94%A8/" class="post-category">
+                                Python使用
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -444,7 +457,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-10
+                    2020-12-11
                 </div>
                 
 
@@ -453,7 +466,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    1.2k
                 </div>
                 
 
@@ -470,7 +483,175 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>目前在做的工作，对接需要用JSON格式，所以就记录了一些内容。</p>
+<ol>
+<li>爬虫任务，需要把爬下来的数据以json格式转给对方。</li>
+</ol>
+<p>在scrapy框架下，写入json格式的内容，保存.json文件</p>
+<pre><code>class JsonPipeline(object):
+    def process_item(self, item, spider):
+        base_dir = &#39;result&#39; + os.sep + item[&#39;keyword&#39;]
+        if not os.path.isdir(base_dir):
+            os.makedirs(base_dir)
+        jsonfile_path = base_dir + os.sep + item[&#39;keyword&#39;] + &#39;.json&#39;
+
+        if item:
+            with codecs.open(jsonfile_path, &#39;a+&#39;) as f:
+                data = &#123;
+                &#39;id&#39;: item[&#39;weibo&#39;][&#39;user_id&#39;],
+                &#39;bid&#39;: item[&#39;weibo&#39;][&#39;bid&#39;],
+                &#39;screen_name&#39;: item[&#39;weibo&#39;][&#39;screen_name&#39;],
+                &#39;pics&#39;: item[&#39;weibo&#39;][&#39;pics&#39;]
+                &#125;
+
+                lines = json.dumps(data, ensure_ascii=False)
+                f.write(lines + &quot;\n&quot;)
+
+        return item
+</code></pre>
+<p>后面传输时，读取json文件，http返回给对方</p>
+<pre><code>json_bigdata = []
+
+if keyword == &quot;[&#39;&#39;]&quot;:
+    file_path = &#39;result/%23&#39; +  str(topic.strip(&quot;#&quot;)) + &#39;%23/%23&#39; +  str(topic.strip(&quot;#&quot;)) + &#39;%23.json&#39;
+
+    try:
+        with open(file_path, &#39;r&#39;, encoding=&#39;utf8&#39;) as fp:
+            for line in fp.readlines():
+                json_data = json.loads(line)
+                json_bigdata.append(json_data)
+
+            self.send_response(200)
+            self.send_header(&#39;Content-Type&#39;, &#39;text/plain; charset=utf-8&#39;)
+            self.end_headers()
+            self.wfile.write(str(json_bigdata).encode(&#39;utf-8&#39;))
+    except:
+        message_parts.append(&#39;&#39;)
+        message = &#39;\r\n&#39;.join(message_parts)
+
+        self.send_response(200)
+        self.send_header(&#39;Content-Type&#39;,
+                         &#39;text/plain; charset=utf-8&#39;)
+        self.end_headers()
+        self.wfile.write(message.encode(&#39;utf-8&#39;))</code></pre>
+<ol start="2">
+<li>更新素材模型时，需要接收同事传来的新增图像数据，是以json格式传来的，我们需要解析处理。</li>
+</ol>
+<p>想到1，我们用过，直接拿过来打开</p>
+<pre><code>import json
+
+file_path = &#39;D:/work/search_image/vgg_picspic/update/download.json&#39;
+json_bigdata = []
+try:
+    with open(file_path, &#39;r&#39;, encoding=&#39;utf8&#39;) as fp:
+        for line in fp.readlines():
+            json_data = json.loads(line)
+            json_bigdata.append(json_data)
+
+        print(json_bigdata)
+        print(len(json_bigdata))
+except:
+    print(&#39;open fail&#39;)</code></pre>
+<p>结果：json数据读取出来了，json数据长度为1<br>json数据格式</p>
+<pre><code>&#123;
+    &quot;code&quot;: 200,
+    &quot;message&quot;: &quot;OK&quot;,
+    &quot;data&quot;: [
+        &#123;
+            &quot;id&quot;: 19635909,
+            &quot;pic_url&quot;: &quot;https:\/\/pic.ibaotu.com\/19\/63\/59\/09G888piCrV3.jpg!fw700&quot;,
+            &quot;tag_names&quot;: &quot;节日海报&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: 19640331,
+            &quot;pic_url&quot;: &quot;https:\/\/pic.ibaotu.com\/19\/64\/03\/31c888piCFMx.jpg!fw700&quot;,
+            &quot;tag_names&quot;: &quot;海报&quot;
+        &#125;,
+        &#123;
+            &quot;id&quot;: 19643949,
+            &quot;pic_url&quot;: &quot;https:\/\/pic.ibaotu.com\/01\/99\/30\/693888piC7XF.jpg!fw700&quot;,
+            &quot;tag_names&quot;: &quot;摄影图&quot;
+        &#125;
+    ]
+&#125;</code></pre>
+<p>接下来我们获取每个key-value的值，来进行处理。所有数据都在一行，它读一行，就把所有数据都读出来了。json_data就是所有数据。我们用print(json_data[“message”])来看看能不能获得想要的值</p>
+<pre><code>file_path = &#39;D:/work/search_image/vgg_picspic/update/download.json&#39;
+json_bigdata = []
+try:
+    with open(file_path, &#39;r&#39;, encoding=&#39;utf8&#39;) as fp:
+        for line in fp.readlines():
+            json_data = json.loads(line)
+
+            print(json_data[&quot;message&quot;])
+
+            json_bigdata.append(json_data)
+        # print(json_bigdata)
+        # print(len(json_bigdata))
+except:
+    print(&#39;open fail&#39;)</code></pre>
+<p>运行结果是理想的</p>
+<blockquote>
+<p>OK</p>
+</blockquote>
+<p>接下来把message换成data，看看情况</p>
+<pre><code>file_path = &#39;D:/work/search_image/vgg_picspic/update/download.json&#39;
+json_bigdata = []
+try:
+    with open(file_path, &#39;r&#39;, encoding=&#39;utf8&#39;) as fp:
+        for line in fp.readlines():
+            json_data = json.loads(line)
+
+            print(len(json_data[&quot;data&quot;]))
+
+            json_bigdata.append(json_data)
+        # print(json_bigdata)
+        # print(len(json_bigdata))
+except:
+    print(&#39;open fail&#39;)</code></pre>
+<p>结果</p>
+<blockquote>
+<p>778<br>数据一眼看下来，确实很多，应该是获取到了data的值，下面我们需要遍历data来得到每个具体的id，url，类型，把他们下载下来。</p>
+</blockquote>
+<pre><code>file_path = &#39;D:/work/search_image/vgg_picspic/update/download.json&#39;
+json_bigdata = []
+try:
+    with open(file_path, &#39;r&#39;, encoding=&#39;utf8&#39;) as fp:
+        for line in fp.readlines():
+            json_data = json.loads(line)
+
+            for i in range(len(json_data[&quot;data&quot;])):
+                print(json_data[&quot;data&quot;][i])
+
+            json_bigdata.append(json_data)
+        # print(json_bigdata)
+        # print(len(json_bigdata))
+except:
+    print(&#39;open fail&#39;)</code></pre>
+<p>运行结果</p>
+<blockquote>
+<p>{‘id’: 19645448, ‘pic_url’: ‘<a target="_blank" rel="noopener" href="https://pic.ibaotu.com/01/99/46/15n888piCJF9.jpg!fw700&#39;">https://pic.ibaotu.com/01/99/46/15n888piCJF9.jpg!fw700&#39;</a>, ‘tag_names’:<br>‘摄影图’}<br>{‘id’: 19645623, ‘pic_url’: ‘<a target="_blank" rel="noopener" href="https://pic.ibaotu.com/01/99/48/24V888piC43a.jpg!fw700&#39;">https://pic.ibaotu.com/01/99/48/24V888piC43a.jpg!fw700&#39;</a>, ‘tag_names’:<br>‘摄影图’}<br>{‘id’: 19645624, ‘pic_url’: ‘<a target="_blank" rel="noopener" href="https://pic.ibaotu.com/01/99/48/23Z888piCb6y.jpg!fw700&#39;">https://pic.ibaotu.com/01/99/48/23Z888piCb6y.jpg!fw700&#39;</a>, ‘tag_names’:<br>‘摄影图’}<br>{‘id’: 19645634, ‘pic_url’: ‘<a target="_blank" rel="noopener" href="https://pic.ibaotu.com/01/99/48/40U888piCHSv.jpg!fw700&#39;">https://pic.ibaotu.com/01/99/48/40U888piCHSv.jpg!fw700&#39;</a>, ‘tag_names’:<br>‘摄影图’}<br>{‘id’: 19645663, ‘pic_url’: ‘<a target="_blank" rel="noopener" href="https://pic.ibaotu.com/01/99/48/73t888piCGVY.jpg!fw700&#39;">https://pic.ibaotu.com/01/99/48/73t888piCGVY.jpg!fw700&#39;</a>, ‘tag_names’:<br>‘节日海报’}<br>{‘id’: 19645667, ‘pic_url’: ‘<a target="_blank" rel="noopener" href="https://pic.ibaotu.com/01/99/48/71p888piCiK7.jpg!fw700&#39;">https://pic.ibaotu.com/01/99/48/71p888piCiK7.jpg!fw700&#39;</a>, ‘tag_names’:<br>‘节日海报’}<br>{‘id’: 19645679, ‘pic_url’: ‘<a target="_blank" rel="noopener" href="https://pic.ibaotu.com/01/99/48/67J888piCrMX.jpg!fw700&#39;">https://pic.ibaotu.com/01/99/48/67J888piCrMX.jpg!fw700&#39;</a>, ‘tag_names’:<br>‘节日海报’}<br>{‘id’: 19645719, ‘pic_url’: ‘<a target="_blank" rel="noopener" href="https://pic.ibaotu.com/01/99/49/28t888piCkgI.jpg!fw700&#39;">https://pic.ibaotu.com/01/99/49/28t888piCkgI.jpg!fw700&#39;</a>, ‘tag_names’:<br>‘节日海报’}<br>{‘id’: 19645730, ‘pic_url’: ‘<a target="_blank" rel="noopener" href="https://pic.ibaotu.com/01/99/49/39g888piCxQI.jpg!fw700&#39;">https://pic.ibaotu.com/01/99/49/39g888piCxQI.jpg!fw700&#39;</a>, ‘tag_names’:<br>‘节日海报’}</p>
+</blockquote>
+<p>这个是我们想要的。下面就是得到url，按照分类下载到本地不同的文件夹，以id命名。</p>
+<blockquote>
+<p>print(json_data[“data”][i][‘id’])<br>print(json_data[“data”][i][‘pic_url’])<br>print(json_data[“data”][i][‘tag_names’])</p>
+</blockquote>
+<p>通过url把图像下载下来</p>
+<pre><code>import requests
+
+url = &quot;https://pic.ibaotu.com/01/99/49/28t888piCkgI.jpg!fw700&quot;
+try:
+    r = requests.get(url)
+    #print(len(r.content))
+    #if len(r.content) &gt; 20000:
+    with open(&#39;poster/&#39; + str(file[&#39;id&#39;][i]) + &#39;.jpg&#39;, &#39;wb&#39;) as code:
+        code.write(r.content)
+except:
+    num = num + 1
+    print(url, num)
+    with open(&#39;url_false.txt&#39;, &#39;w+&#39;) as f:
+        f.write(url + &#39;\r\n&#39;)</code></pre>
+<p>接下来就是进行一些图像预处理了。</p>
+
             </div>
             <hr/>
 
@@ -495,7 +676,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://xiaohongzhong.top/2020/12/10/bei-xie-si-suan-fa-de-jian-dan-ji-lu/">http://xiaohongzhong.top/2020/12/10/bei-xie-si-suan-fa-de-jian-dan-ji-lu/</a>
+                    <a href="http://xiaohongzhong.top/2020/12/11/python-du-xie-json-shi-yong-jing-yan/">http://xiaohongzhong.top/2020/12/11/python-du-xie-json-shi-yong-jing-yan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -532,7 +713,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/python%E4%BD%BF%E7%94%A8/">
+                                    <span class="chip bg-color">python使用</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -963,9 +1148,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/12/11/python-du-xie-json-shi-yong-jing-yan/">
                     <div class="card-image">
@@ -983,9 +1169,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-11
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -998,6 +1184,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1016,19 +1203,19 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/12/10/wang-luo-vgg-de-jian-dan-ji-lu/">
+                <a href="/2020/12/10/bei-xie-si-suan-fa-de-jian-dan-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/21.jpg" class="responsive-img" alt="网络VGG的简单记录">
+                        <img src="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/22.jpg" class="responsive-img" alt="贝叶斯算法的简单记录">
                         
-                        <span class="card-title">网络VGG的简单记录</span>
+                        <span class="card-title">贝叶斯算法的简单记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            记录网络VGG的知识点
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -1037,27 +1224,11 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    深度学习
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            xiao hong zhong
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">深度学习</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%BB%8F%E5%85%B8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">经典神经网络</span>
-                    </a>
-                    
                 </div>
                 
             </div>
