@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="图像分类-自己的数据集-Pytorch, 小骨子还在努力">
+    <meta name="keywords" content="RTX3080有什么不一样？, 小骨子还在努力">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>图像分类-自己的数据集-Pytorch | 小骨子还在努力</title>
+    <title>RTX3080有什么不一样？ | 小骨子还在努力</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">图像分类-自己的数据集-Pytorch</h1>
+                    <h1 class="description center-align post-title">RTX3080有什么不一样？</h1>
                 </div>
             </div>
         </div>
@@ -430,33 +430,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
-                                <span class="chip bg-color">图像处理</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">深度学习</span>
-                            </a>
-                        
-                            <a href="/tags/Pytorch/">
-                                <span class="chip bg-color">Pytorch</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/" class="post-category">
-                                图像分类
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -465,7 +444,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-08
+                    2020-12-17
                 </div>
                 
 
@@ -474,7 +453,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    893
+                    774
                 </div>
                 
 
@@ -491,150 +470,99 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="数据集整理划分"><a href="#数据集整理划分" class="headerlink" title="数据集整理划分"></a>数据集整理划分</h3><pre><code>train_transforms = transforms.Compose([transforms.Resize([224, 224]), transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-train_datasets = datasets.ImageFolder(&#39;dataset/logos_v2&#39;, transform=train_transforms)
+                <hr>
+<p>title: RTX3080有什么不一样？<br>date: 2020-12-17 22:21:55<br>summary: 这里是我新电脑环境搭建的内容<br>categories:</p>
+<ul>
+<li>开发工具<br>tags:</li>
+<li>工具</li>
+</ul>
+<hr>
+<p>开头想要说的是，每一台机器都有不同的配置，每一个配置都要装不同版本的软件。</p>
+<h2 id="显卡驱动"><a href="#显卡驱动" class="headerlink" title="显卡驱动"></a>显卡驱动</h2><p>怎么看显卡驱动-&gt;nvidia-smi</p>
+<p><img src="../../pics/nvidia_driver.png"></p>
+<p>3080-&gt;nvidia-smi 456.81 cuda 11.1 cudnn 8.0.5</p>
+<p>我之前用的电脑是rtx2070，配置是tensorflow-gpu 1.14 cuda10.0 cudnn7.6.5。</p>
+<p>根据显卡驱动的不同，来安装不同的cuda。依据如下</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html">https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html</a></p>
+</blockquote>
+<p>安装了不同版本的cuda，再找配对的cudnn。</p>
+<p>接下来看tensorflow的版本应该用哪个</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://tensorflow.google.cn/install/source_windows">https://tensorflow.google.cn/install/source_windows</a></p>
+</blockquote>
+<p><img src="../../pics/tensorflow_version.png"></p>
+<p>pytorch也找相对应的。cuda10.0就下载cuda10.0的，cuda10.1就用cuda10.1的，因为跑了一个算法，装的是cuda10.0，没有跑成功cuda10.1的pytorch。</p>
+<h2 id="怎么安装pytorch"><a href="#怎么安装pytorch" class="headerlink" title="怎么安装pytorch"></a>怎么安装pytorch</h2><p>官网下载太慢</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/win-64/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/win-64/</a></p>
+</blockquote>
+<p>运行</p>
+<blockquote>
+<p>conda install pytorch-1.7.0-py3.6_cuda110_cudnn8_0.tar.bz2</p>
+</blockquote>
+<p>之后运行</p>
+<blockquote>
+<p>conda install pytorch-gpu torchvision-gpu -c pytorch</p>
+</blockquote>
+<p>torch1.7.0 cuda11.0 cudnn8.0 python3.6就装好了。</p>
+<h2 id="总是出现AttributeError-‘str’-object-has-no-attribute-‘decode’"><a href="#总是出现AttributeError-‘str’-object-has-no-attribute-‘decode’" class="headerlink" title="总是出现AttributeError: ‘str’ object has no attribute ‘decode’"></a>总是出现AttributeError: ‘str’ object has no attribute ‘decode’</h2><p>在运行keras很简单的图像分类时，总是出现AttributeError: ‘str’ object has no attribute ‘decode’<br>tensorflow-cpu 1.14.0</p>
+<p>解决方法：<br>把出现decode(“utf-8”)的地方都去掉</p>
+<blockquote>
+<p>D:\software_install\anaconda\envs\tensorflow-cpu\Lib\site-packages\keras model.py<br>p242 model_config = json.loads(model_config.decode(‘utf-8’))<br>p258 training_config = json.loads(training_config)<br>D:\software_install\anaconda\envs\tensorflow-cpu\Lib\site-packages\keras\engine topology.py<br>p3372<br>if ‘keras_version’ in f.attrs:<br>    original_keras_version = f.attrs[‘keras_version’].decode(‘utf8’)<br>else:<br>    original_keras_version = ‘1’<br>if ‘backend’ in f.attrs:<br>    original_backend = f.attrs[‘backend’].decode(‘utf8’)<br>else:<br>    original_backend = None</p>
+</blockquote>
+<h2 id="conda-install-总是卡在solving-environment"><a href="#conda-install-总是卡在solving-environment" class="headerlink" title="conda install 总是卡在solving environment"></a>conda install 总是卡在solving environment</h2><p>更新conda到最新版本：conda update -n base conda</p>
+<p>再查一下conda版本：conda -V</p>
+<p>并不是最新版本conda 4.7.11</p>
+<p>第二次更新conda到最新版本：conda update -n base conda</p>
+<p>更新完后再查一下conda版本：conda -V，发现是最新版本conda 4.7.11</p>
+<p>然后执行：conda update –all</p>
+<h2 id="windows-terminal"><a href="#windows-terminal" class="headerlink" title="windows terminal"></a>windows terminal</h2><p>颜值确实可以，我直接在Microsoft store下载的。<br>碰见几个问题</p>
+<ol>
+<li>右键添加有windows terminal的选项<br>下载一个图标<blockquote>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/Jioho/img/raw/master/wsl/terminal.ico">https://gitee.com/Jioho/img/raw/master/wsl/terminal.ico</a></p>
+</blockquote>
+</li>
+</ol>
+<p>新建一个文件</p>
+<pre><code>Windows Registry Editor Version 5.00
 
-train_size = int(0.8 * len(train_datasets))
-test_size = len(train_datasets) - int(0.8 * len(train_datasets))
-train_dataset, test_dataset = torch.utils.data.random_split(train_datasets, [train_size, test_size])
+[HKEY_CLASSES_ROOT\Directory\Background\shell\wt]
+@=&quot;Windows Terminal here&quot;
+&quot;Icon&quot;=&quot;%USERPROFILE%\\AppData\\Local\\Terminal\\terminal.ico&quot;
 
-train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=16, shuffle=True, num_workers=0)
-test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=16, shuffle=False, num_workers=0)
-</code></pre>
-<h3 id="训练可视化"><a href="#训练可视化" class="headerlink" title="训练可视化"></a>训练可视化</h3><p>一开始先定义</p>
-<pre><code>from visdom import Visdom
-
-# 将窗口类实例化
-viz = Visdom()
-viz.line([[0., 0.]], [0], win=&#39;train&#39;, opts=dict(title=&#39;train&#39;, legend=[&#39;train_loss&#39;, &#39;train_acc&#39;]))
-viz.line([[0., 0.]], [0], win=&#39;test&#39;, opts=dict(title=&#39;test&#39;, legend=[&#39;test_loss&#39;, &#39;test_acc&#39;]))</code></pre>
-<p>后面再记录loss和acc的变化</p>
-<pre><code># 更新窗口图像
-viz.line([[running_loss / len(train_dataset), train_acc / len(train_dataset)]], [epoch], win=&#39;train&#39;, update=&#39;append&#39;)</code></pre>
-<h3 id="model-train-和model-eval"><a href="#model-train-和model-eval" class="headerlink" title="model.train()和model.eval()"></a>model.train()和model.eval()</h3><p>eval()时，pytorch会自动把BN和DropOut固定住，不会取平均，而是用训练好的值。<br>不然的话，一旦test的batch_size过小，很容易就会被BN层导致生成图片颜色失真极大。</p>
-<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><pre><code>import torch
-from torchvision import models, datasets, transforms
-import matplotlib.pyplot as plt
-
-import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
-from visdom import Visdom
-
-# 将窗口类实例化
-viz = Visdom()
-viz.line([[0., 0.]], [0], win=&#39;train&#39;, opts=dict(title=&#39;train&#39;, legend=[&#39;train_loss&#39;, &#39;train_acc&#39;]))
-viz.line([[0., 0.]], [0], win=&#39;test&#39;, opts=dict(title=&#39;test&#39;, legend=[&#39;test_loss&#39;, &#39;test_acc&#39;]))
-
-device = torch.device(&quot;cuda:0&quot; if torch.cuda.is_available() else &quot;cpu&quot;)
-
-train_transforms = transforms.Compose([transforms.Resize([224, 224]), transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-train_datasets = datasets.ImageFolder(&#39;dataset/logos_v2&#39;, transform=train_transforms)
-
-train_size = int(0.8 * len(train_datasets))
-test_size = len(train_datasets) - int(0.8 * len(train_datasets))
-train_dataset, test_dataset = torch.utils.data.random_split(train_datasets, [train_size, test_size])
-
-train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=16, shuffle=True, num_workers=0)
-test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=16, shuffle=False, num_workers=0)
-
-classes = (&#39;bear&#39;, &#39;bird&#39;, &#39;cat&#39;, &#39;chicken&#39;, &#39;coffee&#39;, &#39;dog&#39;, &#39;duck&#39;, &#39;fish&#39;, &#39;flower&#39;, &#39;tree&#39;)
-
-net = models.vgg19(pretrained=True)
-net.to(device)
-
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
-
-# 训练网络
-for epoch in range(10):
-    net.train()
-    running_loss = 0.0
-    train_acc = 0.0
-
-    for i, data in enumerate(train_dataloader, 0):
-        inputs, labels = data
-        inputs, labels = inputs.to(device), labels.to(device)
-
-        optimizer.zero_grad()
-
-        outputs = net(inputs)
-        loss = criterion(outputs, labels)
-        loss.backward()
-
-        optimizer.step()
-        running_loss += loss.item()
-
-        # 经过测试，pred1 = torch.max(outputs, 1)[1]是和_, pred = torch.max(outputs.data, 1) 的pred相等的！！！
-        #pred1 = torch.max(outputs, 1)[1]
-        _, pred = torch.max(outputs.data, 1)
-
-        train_correct = (pred == labels).sum()
-        train_acc += train_correct.item()
-
-        if i  == len(train_dataloader) - 1:
-            print(&#39;Training [%d, %5d] loss: %.3f acc: %.3f&#39; % (epoch + 1, i + 1, running_loss / len(train_dataset), train_acc / len(train_dataset)))
-            # 更新窗口图像
-            viz.line([[running_loss / len(train_dataset), train_acc / len(train_dataset)]], [epoch], win=&#39;train&#39;, update=&#39;append&#39;)
-            running_loss = 0.0
-
-    # 验证集
-    net.eval()
-    eval_loss = 0.0
-    eval_acc = 0.0
-
-    for i, data in enumerate(test_dataloader, 0):
-        inputs, labels = data
-        inputs, labels = inputs.to(device), labels.to(device)
-        outputs = net(inputs)
-        loss = criterion(outputs, labels)
-        eval_loss += loss.item()
-
-        _, pred = torch.max(outputs.data, 1)
-
-        num_correct = (pred == labels).sum()
-        eval_acc += num_correct.item()
-
-        if i  == len(test_dataloader) - 1:
-            print(&#39;Evaluating [%d, %5d] loss: %.3f acc: %.3f&#39; % (epoch + 1, i + 1, eval_loss / len(test_dataset), eval_acc / len(test_dataset)))
-            viz.line([[eval_loss / len(test_dataset), eval_acc / len(test_dataset)]], [epoch], win=&#39;test&#39;, update=&#39;append&#39;)
-            eval_loss = 0.0
-
-torch.save(net.state_dict(), &#39;model/logos_v2.pkl&#39;)
-print(&#39;Finished Training&#39;)
-
-
-# 预测
-dataiter = iter(test_dataloader)
-images, labels = dataiter.next()
-#imshow(torchvision.utils.make_grid(images))
-print(&#39; &#39;.join(&#39;%5s&#39; % classes[labels[j]] for j in range(4)))
-
-images, labels = images.to(device), labels.to(device)
-#outputs = net(images)
-net.load_state_dict(torch.load(&#39;model/logos_v2.pkl&#39;))
-outputs = net(images)
-
-_, predicted = torch.max(outputs, 1)
-print(&#39;Predicted: &#39;, &#39; &#39;.join(&#39;%5s&#39; % classes[predicted[j]] for j in range(4)))
-
-# 整个数据集预测
-correct = 0
-total = 0
-with torch.no_grad():
-    for data in test_dataloader:
-        images, labels = data
-        images, labels = images.to(device), labels.to(device)
-        #outputs = net(images)
-        net.load_state_dict(torch.load(&#39;model/logos_v2.pkl&#39;))
-        outputs = net(images)
-        _, predicted = torch.max(outputs.data, 1)
-
-        total += labels.size(0)
-        correct += (predicted == labels).sum().item()
-
-print(&#39;Accuracy of the network on the 10000 test images: %d %%&#39; % (100 * correct / total))
-</code></pre>
+[HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command]
+@=&quot;C:\\Users\\[你的电脑用户名！你的电脑用户名！]\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe&quot;</code></pre>
+<p>双击</p>
+<p>编辑</p>
+<blockquote>
+<p>C:\Users[用户名]\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json</p>
+</blockquote>
+<pre><code>&#123;
+               // Make changes here to the powershell.exe profile.
+               &quot;guid&quot;: &quot;&#123;61c54bbd-c2c6-5271-96e7-009a87ff44bf&#125;&quot;,
+               &quot;name&quot;: &quot;Windows PowerShell&quot;,
+               &quot;commandline&quot;: &quot;powershell.exe &quot;,
+               &quot;hidden&quot;: false
+          &#125;,
+改成：
+          &#123;
+               // Make changes here to the powershell.exe profile.
+               &quot;guid&quot;: &quot;&#123;61c54bbd-c2c6-5271-96e7-009a87ff44bf&#125;&quot;,
+               &quot;name&quot;: &quot;Windows PowerShell&quot;,
+               &quot;commandline&quot;: &quot;powershell.exe &quot;,
+               &quot;hidden&quot;: false,
+               &quot;startingDirectory&quot;: &quot;.&quot;
+          &#125;,</code></pre>
+<p>就ok了。</p>
+<ol start="2">
+<li>windows PS 进不去虚拟环境<br>conda activate torch总是进不去，没有返回</li>
+</ol>
+<p>解决：<br>以管理员身份运行powershell 执行命令</p>
+<blockquote>
+<p>Set-ExecutionPolicy RemoteSigned</p>
+</blockquote>
+<p>然后打开powershell,输入conda init powershell，之后再打开就直接进入虚拟环境了。</p>
 
             </div>
             <hr/>
@@ -660,7 +588,7 @@ print(&#39;Accuracy of the network on the 10000 test images: %d %%&#39; % (100 *
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://xiaohongzhong.top/2020/12/08/tu-xiang-fen-lei-zi-ji-de-shu-ju-ji-pytorch/">http://xiaohongzhong.top/2020/12/08/tu-xiang-fen-lei-zi-ji-de-shu-ju-ji-pytorch/</a>
+                    <a href="http://xiaohongzhong.top/2020/12/17/rtx3080-you-shi-me-bu-yi-yang/">http://xiaohongzhong.top/2020/12/17/rtx3080-you-shi-me-bu-yi-yang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -697,19 +625,7 @@ print(&#39;Accuracy of the network on the 10000 test images: %d %%&#39; % (100 *
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
-                                    <span class="chip bg-color">图像处理</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">深度学习</span>
-                                </a>
-                            
-                                <a href="/tags/Pytorch/">
-                                    <span class="chip bg-color">Pytorch</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -1140,53 +1056,39 @@ print(&#39;Accuracy of the network on the 10000 test images: %d %%&#39; % (100 *
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/12/10/wang-luo-vgg-de-jian-dan-ji-lu/">
+                <a href="/2020/12/17/rtx3080-you-shi-me-bu-yi-yang/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/21.jpg" class="responsive-img" alt="网络VGG的简单记录">
+                        <img src="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/7.jpg" class="responsive-img" alt="RTX3080有什么不一样？">
                         
-                        <span class="card-title">网络VGG的简单记录</span>
+                        <span class="card-title">RTX3080有什么不一样？</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            记录网络VGG的知识点
+                            
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-17
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    深度学习
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            xiao hong zhong
                             
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">深度学习</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%BB%8F%E5%85%B8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">经典神经网络</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -1197,31 +1099,31 @@ print(&#39;Accuracy of the network on the 10000 test images: %d %%&#39; % (100 *
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/12/08/shen-du-xue-xi-zhi-ji-suan-ji-shi-jue-gai-nian/">
+                <a href="/2020/12/14/yolov3-he-yolov4-de-jian-dan-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="深度学习之计算机视觉概念">
+                        <img src="https://cdn.jsdelivr.net/gh/rookiexiao123/rookiexiao123.github.io/medias/featureimages/23.jpg" class="responsive-img" alt="YOLOv3和YOLOv4的简单记录">
                         
-                        <span class="card-title">深度学习之计算机视觉概念</span>
+                        <span class="card-title">YOLOv3和YOLOv4的简单记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是计算机视觉的基础概念
+                            这是一个目标检测算法
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-14
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    深度学习
+                            <a href="/categories/%E8%B7%91%E8%BF%87%E7%9A%84%E7%AE%97%E6%B3%95/" class="post-category">
+                                    跑过的算法
                                 </a>
                             
                             
@@ -1230,6 +1132,10 @@ print(&#39;Accuracy of the network on the 10000 test images: %d %%&#39; % (100 *
                 </div>
                 
                 <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">
+                        <span class="chip bg-color">目标检测</span>
+                    </a>
                     
                     <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
                         <span class="chip bg-color">深度学习</span>

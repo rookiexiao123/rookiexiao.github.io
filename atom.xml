@@ -6,7 +6,7 @@
   <link href="http://xiaohongzhong.top/atom.xml" rel="self"/>
   
   <link href="http://xiaohongzhong.top/"/>
-  <updated>2020-12-11T08:17:12.918Z</updated>
+  <updated>2020-12-22T14:12:42.990Z</updated>
   <id>http://xiaohongzhong.top/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RTX3080有什么不一样？</title>
+    <link href="http://xiaohongzhong.top/2020/12/17/rtx3080-you-shi-me-bu-yi-yang/"/>
+    <id>http://xiaohongzhong.top/2020/12/17/rtx3080-you-shi-me-bu-yi-yang/</id>
+    <published>2020-12-17T14:21:55.000Z</published>
+    <updated>2020-12-22T14:12:42.990Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>YOLOv3和YOLOv4的简单记录</title>
+    <link href="http://xiaohongzhong.top/2020/12/14/yolov3-he-yolov4-de-jian-dan-ji-lu/"/>
+    <id>http://xiaohongzhong.top/2020/12/14/yolov3-he-yolov4-de-jian-dan-ji-lu/</id>
+    <published>2020-12-14T01:48:50.000Z</published>
+    <updated>2020-12-16T12:36:29.708Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="跑过的算法" scheme="http://xiaohongzhong.top/categories/%E8%B7%91%E8%BF%87%E7%9A%84%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="目标检测" scheme="http://xiaohongzhong.top/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+    <category term="深度学习" scheme="http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>python读写json使用经验</title>
@@ -46,7 +94,7 @@
     <link href="http://xiaohongzhong.top/2020/12/10/bei-xie-si-suan-fa-de-jian-dan-ji-lu/"/>
     <id>http://xiaohongzhong.top/2020/12/10/bei-xie-si-suan-fa-de-jian-dan-ji-lu/</id>
     <published>2020-12-10T10:03:38.000Z</published>
-    <updated>2020-12-11T09:34:35.821Z</updated>
+    <updated>2020-12-14T14:52:11.144Z</updated>
     
     
     
@@ -108,9 +156,9 @@
     
     <category term="图像处理" scheme="http://xiaohongzhong.top/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
-    <category term="Pytorch" scheme="http://xiaohongzhong.top/tags/Pytorch/"/>
-    
     <category term="深度学习" scheme="http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="Pytorch" scheme="http://xiaohongzhong.top/tags/Pytorch/"/>
     
   </entry>
   
@@ -162,9 +210,9 @@
     
     <category term="图像处理" scheme="http://xiaohongzhong.top/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
     
-    <category term="Pytorch" scheme="http://xiaohongzhong.top/tags/Pytorch/"/>
-    
     <category term="深度学习" scheme="http://xiaohongzhong.top/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="Pytorch" scheme="http://xiaohongzhong.top/tags/Pytorch/"/>
     
   </entry>
   
