@@ -6,7 +6,7 @@
   <link href="http://xiaohongzhong.top/atom.xml" rel="self"/>
   
   <link href="http://xiaohongzhong.top/"/>
-  <updated>2020-12-22T14:12:42.990Z</updated>
+  <updated>2020-12-22T14:13:53.968Z</updated>
   <id>http://xiaohongzhong.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://xiaohongzhong.top/2020/12/17/rtx3080-you-shi-me-bu-yi-yang/"/>
     <id>http://xiaohongzhong.top/2020/12/17/rtx3080-you-shi-me-bu-yi-yang/</id>
     <published>2020-12-17T14:21:55.000Z</published>
-    <updated>2020-12-22T14:12:42.990Z</updated>
+    <updated>2020-12-22T14:13:53.968Z</updated>
     
     
       
@@ -34,6 +34,10 @@
     
     
     
+    <category term="开发工具" scheme="http://xiaohongzhong.top/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="工具" scheme="http://xiaohongzhong.top/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
